@@ -56,6 +56,8 @@ group :production do
 end
 
 group :test do
+  gem 'rake'
+  gem "codeclimate-test-reporter", require: nil
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'

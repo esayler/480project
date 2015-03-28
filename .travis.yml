@@ -3,4 +3,7 @@ rvm:
 - 2.2.0
 notifications:
   slack:
-    secure: hnRCFVGaa9eF0OUQfI9bS8jkw4lO8TzyBc2wnYrTOTnMRjFLnIZFUQskk9hMC9+xdlB5y2rGlAcavLOtUGDqeiNH7tbolR04R3DWFPRR6BR+AARTZYa2iF48FkcIWRCc2OTdiXmT/Mp9OZ0H1xGD5D4SxopjLpCZD5Laz/Wasoo=
+    secure: hnRCFVGaa9eF0OUQfI9bS8jkw4lO8TzyBc2wnYrTOTnMRjFLnIZFUQskk9hMC9+xdlB5y2rGlAcavLOtUGDqeiNH7tbolR04R3DWFPRR6BR+AARTZYa2iF48FkcIWRCc2OTdiXmT/Mp9OZ0H1xGD5D4SxopjLpCZD5Laz/Wasoo=i
+addons:
+    code_climate:
+        repo_token: 290a69fef986f2c57b185a42ef8db2d839cc2cc97dacf08ea1a72a20be40845d
