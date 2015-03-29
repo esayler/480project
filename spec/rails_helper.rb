@@ -33,6 +33,11 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
+  # add Omniauth mocking for all tests
+  config.include Omniauth::Mock
+  # only add SessionHelpers to feature tests
+  config.include Omniauth::SessionHelpers, type: :feature
+
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.
@@ -48,3 +53,6 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 end
+
+# add OmniAuth test mode (all requests to OmniAuth bypassed to use mock auth)
+Omniauth.config.test_mode = true
