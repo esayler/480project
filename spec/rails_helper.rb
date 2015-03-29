@@ -18,7 +18,7 @@ require 'rspec/rails'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-# Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
@@ -34,9 +34,9 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
 
   # add Omniauth mocking for all tests
-  config.include Omniauth::Mock
+  #config.include Omniauth::Mock
   # only add SessionHelpers to feature tests
-  config.include Omniauth::SessionHelpers, type: :feature
+  #config.include Omniauth::SessionHelpers, type: :feature
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
@@ -55,4 +55,4 @@ RSpec.configure do |config|
 end
 
 # add OmniAuth test mode (all requests to OmniAuth bypassed to use mock auth)
-Omniauth.config.test_mode = true
+#OmniAuth.config.test_mode = true
