@@ -21,7 +21,7 @@ feature 'Sign in', :omniauth do
   #   Then I see an authentication error message
   scenario 'user cannot sign in with invalid account' do
     # set provider's mock to a symbol instead of a hash --> will fail
-    OmniAuth.config.mock_auth[:google] = :invalid_credentials
+    OmniAuth.config.mock_auth[:google_oauth2] = :invalid_credentials
     visit root_path
     expect(page).to have_content("Sign in")
     click_link "Sign in"

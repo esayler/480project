@@ -2,7 +2,7 @@ module Omniauth
 
   module Mock
     def auth_mock
-      OmniAuth.config.mock_auth[:google] = {
+      OmniAuth.config.mock_auth[:google_oauth2] = {
         'provider' => 'google_oauth2',
         'uid' => '123545',
         'user_info' => {
