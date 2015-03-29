@@ -34,20 +34,19 @@ group :development do
   gem 'rb-inotify', :require=>false
   gem 'spring-commands-rspec'
   gem 'rails_layout'
+  gem 'pry-rails'
+  gem 'pry-rescue'
+  gem 'byebug'
+  gem 'rubocop'
 end
 
 group :development, :test do
   gem 'sqlite3'
-  gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
-
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'faker'
-  gem 'pry-rails'
-  gem 'pry-rescue'
-  gem 'rubocop'
 end
 
 group :production do
