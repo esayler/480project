@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 
   def new
     # signin route
-    redirect_to '/auth/twitter'
+    redirect_to '/auth/google_oauth2'
   end
 
   def create
