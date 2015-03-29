@@ -4,9 +4,12 @@ cache: bundler
 rvm:
     - 2.2.0
 
-script: 'bundle exec rake spec'
+#script: 'bundle exec rake spec'
+before_install:
+  - gem update --system
+  - gem --version
 
-bundler_args: --without development
+bundler_args: --without development production
 
 branches:
   only:
