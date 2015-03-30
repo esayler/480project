@@ -390,6 +390,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   selenium-webdriver
   simple_form
+  simplecov
   spring
   spring-commands-rspec
   sqlite3
