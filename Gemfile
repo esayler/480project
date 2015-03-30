@@ -38,7 +38,7 @@ group :development do
   gem 'pry-rails'
   gem 'pry-rescue'
   gem 'byebug'
-  gem 'rubocop'
+  gem 'rubocop', :require=>false
 end
 
 group :development, :test do
