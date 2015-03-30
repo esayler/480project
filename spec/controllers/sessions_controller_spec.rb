@@ -6,21 +6,24 @@ describe SessionsController, :omniauth do
 
   describe "#create" do
 
-    it "creates a user" do
-      expect {post :create, provider: :google_oauth2}.to change{ User.count }.by(1)
-    end
-
     it "creates a session" do
       expect(session[:user_id]).to be_nil
       post :create, provider: :google_oauth2
       expect(session[:user_id]).not_to be_nil
     end
 
-    it "redirects to the home page" do
+    it "redirects to the home page for registered user" do
       post :create, provider: :google_oauth2
+      u = User.new
+      User.should_receive(:where).and_return(u)
       expect(response).to redirect_to root_url
     end
 
+    it "redirects to new user page for unregistered user" do
+      post :create, provider: :google_oauth2
+      User.should_receive(:where).and_return(nil)
+      expect(response).to redirect_to new_user_path
+    end
   end
 
   describe "#destroy" do
