@@ -2,11 +2,11 @@
 
 FactoryGirl.define do
   factory :problem do
-    name "MyString"
-    language "MyString"
-    difficulty "MyString"
-    pid "MyString"
-    description "MyText"
-    author "MyString"
+    name "problem_name"
+    language "python"
+    difficulty "easy"
+    pid "0001"
+    description "Hello, World!"
+    author "Professor X"
   end
 end
