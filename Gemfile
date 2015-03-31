@@ -63,4 +63,5 @@ group :test do
   gem 'selenium-webdriver'
   gem 'factory_girl_rails'
   gem 'faker'
+  gem 'shoulda-matchers', require: false
 end
