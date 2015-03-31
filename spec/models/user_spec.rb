@@ -1,5 +1,8 @@
-require 'rails_helper'
+describe User do
+  
+  it "should be valid" do
+    user = User.new
+    expect(user).to be_valid
+  end
 
-RSpec.describe User, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
 end
