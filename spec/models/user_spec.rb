@@ -1,21 +1,24 @@
 describe User do
 
-  describe "when email is non-empty" do
-
-    it "should be valid" do
-      user = build(:user)
-      expect(user).to be_valid
-    end
-
+  it 'is valid with a name and email' do
+    user = build(:user)
+    expect(user).to be_valid
   end
 
-  describe "when email is blank" do
+  it 'is invalid without a name' do
+    user = build(:user, name: nil)
+    expect(user).to_not be_valid
+  end
 
-    it "should not be valid" do
+  it 'is invalid without a email' do
       user = build(:user, email: nil)
       expect(user).to_not be_valid
-    end
+  end
 
+  it 'is invalid with a duplicate email' do
+      create(:user)
+      user = build(:user)
+      expect(user).to_not be_valid
   end
 
 end
