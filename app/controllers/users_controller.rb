@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   before_filter :correct_user?, :except => [:index]
 
   def index
-  	byebug
     @users = User.all
   end
 
