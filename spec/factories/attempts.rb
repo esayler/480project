@@ -4,6 +4,6 @@ FactoryGirl.define do
   factory :attempt do
     user_id 1
     problem_id 1
-    submission "MyText"
+    submission "Here is my submission to this very challenging problem!"
   end
 end
