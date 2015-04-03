@@ -12,6 +12,8 @@ class UsersController < ApplicationController
   end
 
   def new
+    @name = session["devise.google_data"]['info']['name']
+    @email = session["devise.google_data"]['info']['email']
   end
 
   def edit
