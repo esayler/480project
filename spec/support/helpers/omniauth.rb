@@ -5,7 +5,7 @@ module Omniauth
       OmniAuth.config.mock_auth[:google_oauth2] = {
         'provider' => 'google_oauth2',
         'uid' => '123545',
-        'user_info' => {
+        'info' => {
           'name' => 'mockuser',
           'email' => 'mockemail@fake.com'
         },

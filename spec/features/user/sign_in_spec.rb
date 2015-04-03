@@ -4,6 +4,10 @@
 #   So I can visit protected areas of the site
 feature 'Sign in', :omniauth do
 
+  #before do
+    #request.env["devise.mapping"] = Devise.mappings[:user] # If using Devise
+    #request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2] 
+  #end
   # Scenario: User can sign in with valid account
   #   Given I have a valid account
   #   And I am not signed in
