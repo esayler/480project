@@ -1,6 +1,6 @@
 %li= link_to 'About', page_path('about')
 - if user_signed_in?
-  %li= link_to 'Sign out', signout_path
+  %li= link_to 'Sign out', destroy_user_session_path, :method => :delete
 - else
   %li= link_to 'Sign in', user_omniauth_authorize_path(:google_oauth2)
 - if user_signed_in?
