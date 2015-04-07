@@ -32,6 +32,21 @@ feature 'Edit profile', :devise do
     expect(page).to have_content('Edit account')
     click_on 'Edit account'
     expect(page).to have_content('Edit User')
+    expect(page).to have_css("button,right")
+  end
+
+  # Scenario: User can update personal info when signed in
+  #   Given I am signed in
+  #   So that I can update my personal info
+  #   I want my new info to be persisted in the db when I press update on the edit user page
+  scenario "user's new user info is saved by the db when update is pressed" do
+    login
+    # expect(page).to have_content('Edit account')
+    click_on 'Edit account'
+    # expect(page).to have_content('Edit User')
+    # expect(page).to have_button("Update User")
+    click_on "Update"
+    expect(page).to have_content("Your account has been updated successfully.")
   end
 
 end
