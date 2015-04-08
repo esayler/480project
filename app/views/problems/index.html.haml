@@ -1,0 +1,8 @@
+.container
+  .row
+    %h3 Problems
+    .column
+      %table.table
+        %tbody
+          - @problems.each do |problem|
+            %tr= render user
