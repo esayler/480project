@@ -1,0 +1,8 @@
+.container
+  .row
+    %h3 Attempts
+    .column
+      %table.table
+        %tbody
+          - @attempts.each do |attempt|
+            %tr= render attempt
