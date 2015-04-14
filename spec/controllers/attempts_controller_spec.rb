@@ -15,4 +15,19 @@ RSpec.describe AttemptsController, :type => :controller do
     end
   end
 
+  
+  # describe "GET #show" do
+  #  	it "routes correctly" do
+  # 	  p = Problem.new
+  #     expect(Problem).to receive(:find).with("1") { p }
+  #     get :show, id: 1
+  #     		expect(response.status).to eq(200)
+  #   	end
+
+  #   	it "renders the show template" do
+  #     		expect(Problem).to receive(:find).with("1") { p }
+  #     		get :show, id: 1
+  #     		expect(response).to render_template(:show)
+  #   	end
+  # 	end
 end
