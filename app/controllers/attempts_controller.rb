@@ -13,7 +13,7 @@ class AttemptsController < ApplicationController
 
         def create
             a = Attempt.new(create_params)
-            a.user_id = current_user_id
+            a.user_id = current_user.id
             if a.save
                 flash[:notice] = "Attempt submitted successfully!"
                 redirect_to problems_path
@@ -25,7 +25,7 @@ class AttemptsController < ApplicationController
 
 private
         def create_params
-            params.require(:submission)
+            params.require(:attempt).permit(:submission)
         end
             
 end
