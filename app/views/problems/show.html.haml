@@ -1,3 +1,12 @@
 %h3 Problem
 %p
-  Problem: #{@problem.id if @problem}
+  Problem: #{@problem.name if @problem}
+  %br
+  Difficulty: #{@problem.difficulty if @problem}
+  %br
+  Description: #{@problem.description if @problem}
+  %br
+  Author: #{@problem.author if @problem}
+  %br
+  =link_to "Submit an Attempt", new_attempt_path
+
