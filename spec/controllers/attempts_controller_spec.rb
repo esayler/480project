@@ -16,18 +16,39 @@ RSpec.describe AttemptsController, :type => :controller do
   end
 
   
-  # describe "GET #show" do
-  #  	it "routes correctly" do
-  # 	  p = Problem.new
-  #     expect(Problem).to receive(:find).with("1") { p }
-  #     get :show, id: 1
-  #     		expect(response.status).to eq(200)
-  #   	end
+  describe "GET #show" do
+   	it "routes correctly" do
+      a = Attempt.new
+      expect(Attempt).to receive(:find).with("1") { a }
+      get :show, id: 1
+      expect(response.status).to eq(200)
+    end
 
-  #   	it "renders the show template" do
-  #     		expect(Problem).to receive(:find).with("1") { p }
-  #     		get :show, id: 1
-  #     		expect(response).to render_template(:show)
-  #   	end
-  # 	end
+  it "renders the show template" do
+      expect(Attempt).to receive(:find).with("1") { a }
+      get :show, id: 1
+      expect(response).to render_template(:show)
+    end
+  end
+
+  describe "POST #create" do
+    it "should redirect to index on success" do
+      a = Attempt.new
+      Attempt.should_receive(:new).and_return(a)
+      a.should_receive(:save).and_return(true)
+      post :create, { :attempt => { "user_id"=>1, "problem_id"=>1, "submission" => "my best guess" } }
+      response.should redirect_to(problems_path)#TODO
+      expect(response).to have_content("Attempt successfully submitted")
+    end
+
+
+    it "should redirect back to new template on failure and flash a warning" do
+      a = Attempt.new
+      Attempt.should_receive(:new).and_return(a)
+      a.should_receive(:save).and_return(true)
+      post :create, { :attempt => { "user_id"=>-1, "problem_id"=>-1, "submission" => "my best guess" } }
+      response.should redirect_to(problems_path)#TODO
+      expect(response).to have_content("Attempt failed to be submitted")
+    end
+  end
 end
