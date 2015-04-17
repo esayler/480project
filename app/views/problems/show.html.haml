@@ -6,7 +6,7 @@
   %br
   Description: #{@problem.description if @problem}
   %br
-  Author: #{@problem.author if @problem}
+  Author: #{@problem.user.name if @problem}
   %br
   =link_to "Submit an Attempt", new_problem_attempt_path(@problem.id)
 

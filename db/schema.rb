@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150417203128) do
+ActiveRecord::Schema.define(version: 20150417212407) do
 
   create_table "attempts", force: :cascade do |t|
     t.integer  "user_id"
@@ -26,9 +26,7 @@ ActiveRecord::Schema.define(version: 20150417203128) do
     t.string   "name"
     t.string   "language"
     t.string   "difficulty"
-    t.string   "pid"
     t.text     "description"
-    t.string   "author"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "user_id"
