@@ -1,0 +1,16 @@
+#main 
+  Problem: #{@problem.name if @problem}
+  %br
+  Difficulty: #{@problem.difficulty if @problem}
+  %br
+  Description: #{@problem.description if @problem}
+  
+  =form_for Attempt.new do |f|
+    =f.label :user_id
+    =f.text_field :user_id, :required => true
+    %br
+    =f.label :submission
+    =f.text_area :submission, :required => true
+    %br
+    =f.submit "Submit Attempt"
+  =link_to "Return to Problem", problems_path
