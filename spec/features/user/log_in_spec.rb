@@ -18,6 +18,14 @@ feature 'Log in', :omniauth do
     expect(page).to have_content("Log out")
   end
 
+  scenario "redirect to signup when signup fail" do
+    user = double('user')
+    User.stub(:from_omniauth).and_return(user)
+    user.stub(:persisted?).and_return(false)
+    login
+    expect(page).to have_content("Log in")
+  end
+
   # Scenario: User cannot log in with invalid account
   #   Given I have no account
   #   And I am not signed in
