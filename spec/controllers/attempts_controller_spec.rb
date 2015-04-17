@@ -33,6 +33,7 @@ RSpec.describe AttemptsController, :type => :controller do
 
   describe "POST #create" do
     it "should redirect to index on success" do
+      #@problem = Problem.find(params[:id])
       a = Attempt.new
       Attempt.should_receive(:new).and_return(a)
       a.should_receive(:save).and_return(true)

@@ -9,17 +9,21 @@ class AttemptsController < ApplicationController
         end
 
         def new
+        	@problem = Problem.find(params[:problem_id])
+        	@attempt = Attempt.new()
         end
 
         def create
             a = Attempt.new(create_params)
             a.user_id = current_user.id
+        	@problem = Problem.find(params[:problem_id])
+        	a.problem_id = @problem.id
             if a.save
                 flash[:notice] = "Attempt submitted successfully!"
-                redirect_to problems_path
+                redirect_to problem_attempts_path(@problem.id)
             else
                 flash[:warning] = "Attempt couldn't be submitted"
-                redirect_to new_attempt_path
+                redirect_to new_problem_attempt_path(@problem.id)
             end
         end
 
