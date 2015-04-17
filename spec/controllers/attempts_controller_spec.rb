@@ -12,7 +12,7 @@ RSpec.describe AttemptsController, :type => :controller do
       get :index,{:problem_id => 1}
       expect(response.status).to eq(200)
     end
-	it "renders the index template show all attempts grouped by problem" do
+	it "renders the index template show all attempts for a problem sorted by grade" do
       x, y = Attempt.create!, Attempt.create!
       expect(Attempt).to receive(:all) { [x,y] }
   	  get :index,{:problem_id => 1}
