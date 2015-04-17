@@ -1,5 +1,7 @@
 %h3 Attempt
 %p
-  Name: #{@attempt.user_id}
-  Problem:
+  Name: #{@attempt.user.name}
+  %p
+  Problem: #{@attempt.problem.name}
+  %p
   Submission: #{@attempt.submission if @attempt}
