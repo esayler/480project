@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => 'omniauth_callbacks',
                                         :registrations => 'registrations'  }
   resources :users, only: [:index, :show ]
-  resources :attempts, only: [:index, :create, :new, :show ]
-  resources :problems
+  resources :problems do
+    resources :attempts, only: [:index, :create, :new, :show ]
+  end
 end
