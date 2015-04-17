@@ -1,15 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe AttemptsController, :type => :controller do
+  before do
+    allow(controller).to receive(:authenticate_user!).and_return(true)
+    user = double('user')
+    user.stub(:id).and_return(1)
+    allow(controller).to receive(:current_user){ user }
+  end
   describe "GET #index" do
     it "routes correctly" do
-      get :index
+      get :index,{:problem_id => 1}
       expect(response.status).to eq(200)
     end
 	it "renders the index template show all attempts grouped by problem" do
       x, y = Attempt.create!, Attempt.create!
       expect(Attempt).to receive(:all) { [x,y] }
-  	  get :index
+  	  get :index,{:problem_id => 1}
       expect(response).to render_template(:index)
       expect(assigns(:attempts)).to match_array([x,y])
     end
@@ -20,13 +26,13 @@ RSpec.describe AttemptsController, :type => :controller do
    	it "routes correctly" do
       a = Attempt.new
       expect(Attempt).to receive(:find).with("1") { a }
-      get :show, id: 1
+      get :show,{:problem_id => 1}
       expect(response.status).to eq(200)
     end
 
   it "renders the show template" do
       expect(Attempt).to receive(:find).with("1") { a }
-      get :show, id: 1
+      get :show,{:problem_id => 1}
       expect(response).to render_template(:show)
     end
   end
