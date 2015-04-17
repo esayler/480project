@@ -5,7 +5,6 @@ RSpec.describe ProblemsController, :type => :controller do
     allow(controller).to receive(:authenticate_user!).and_return(true)
     user = double('user')
     user.stub(:id).and_return(1)
-    allow(request.env['warden']).to receive(:authenticate!) { user }
     allow(controller).to receive(:current_user){ user }
   end
 	describe "GET #index" do
