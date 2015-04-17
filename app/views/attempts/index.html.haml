@@ -6,3 +6,4 @@
         %tbody
           - @attempts.each do |attempt|
             %tr= render attempt
+  %p= link_to "Back to the problem", problem_path(@attempts[0].problem_id)
