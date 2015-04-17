@@ -8,5 +8,5 @@
   %br
   Author: #{@problem.author if @problem}
   %br
-  =link_to "Submit an Attempt", new_attempt_path
+  =link_to "Submit an Attempt", new_problem_attempt_path(@problem.id)
 

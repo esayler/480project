@@ -1,0 +1,2 @@
+%td= attempt.user.name
+%td= link_to attempt.submission.slice(0,20) + "...", problem_attempt_path(attempt.problem_id, attempt.id)
