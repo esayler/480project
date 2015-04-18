@@ -1,7 +1,8 @@
 class AttemptsController < ApplicationController
     before_filter :authenticate_user!
 	def index
-	    @attempts = Attempt.order(grade: :desc).where("problem_id = ?", params[:problem_id])
+        @problem = Problem.find(params[:problem_id])
+	    @attempts = Attempt.order(grade: :desc).where("problem_id = ?", @problem.id)
 	end
 
     def show
