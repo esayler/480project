@@ -20,8 +20,8 @@ class AttemptsController < ApplicationController
         a.user_id = current_user.id
         a.grade = -1
 
-    	@problem = Problem.find(params[:problem_id])
-    	a.problem_id = @problem.id
+        @problem = Problem.find(params[:problem_id])
+        a.problem_id = @problem.id
         
         if a.save
             flash[:notice] = "Attempt submitted successfully!"
@@ -33,12 +33,19 @@ class AttemptsController < ApplicationController
     end
 
     def edit
-        # @problem = Problem.find(params[:problem_id])
+        @problem = Problem.find(params[:problem_id])
         @attempt = Attempt.find(params[:id])
     end
 
     def update
-
+        @attempt = Attempt.find(params[:id])
+        if @attempt.update(update_params)
+            flash[:notice] = "The attempt was graded successfully."
+            redirect_to problem_attempts_path(@attempt.problem_id)
+        else
+            flash[:warning] = "The attempt was not graded successfully"
+            redirect_to problem_attempt_path(@attempt.problem_id, @attempt.id)
+        end
     end
 
 private
