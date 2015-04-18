@@ -11,15 +11,18 @@ class AttemptsController < ApplicationController
 
     def new
     	@problem = Problem.find(params[:problem_id])
-    	@attempt = Attempt.new()
+    	@attempt = Attempt.new
     end
 
     def create
         a = Attempt.new(create_params)
+
         a.user_id = current_user.id
+        a.grade = -1
+
     	@problem = Problem.find(params[:problem_id])
     	a.problem_id = @problem.id
-        a.grade = -1
+        
         if a.save
             flash[:notice] = "Attempt submitted successfully!"
             redirect_to problem_attempts_path(@problem.id)
@@ -29,9 +32,22 @@ class AttemptsController < ApplicationController
         end
     end
 
+    def edit
+        # @problem = Problem.find(params[:problem_id])
+        @attempt = Attempt.find(params[:id])
+    end
+
+    def update
+
+    end
+
 private
     def create_params
         params.require(:attempt).permit(:submission)
+    end
+
+    def update_params
+        params.require(:attempt).permit(:grade)
     end
             
 end
