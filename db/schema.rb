@@ -11,15 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150417225048) do
+ActiveRecord::Schema.define(version: 20150417212407) do
 
   create_table "attempts", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "problem_id"
     t.text     "submission"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "grade"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "grade",      default: -1
   end
 
   create_table "problems", force: :cascade do |t|
