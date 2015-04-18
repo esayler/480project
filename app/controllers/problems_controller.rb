@@ -9,6 +9,7 @@ class ProblemsController < ApplicationController
   	end
 
   	def new
+  		@problem = Problem.new
   	end
 
   	def create
