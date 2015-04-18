@@ -4,6 +4,6 @@ Rails.application.routes.draw do
                                         :registrations => 'registrations'  }
   resources :users, only: [:index, :show ]
   resources :problems do
-    resources :attempts, only: [:index, :create, :new, :show ]
+    resources :attempts#, only: [:index, :create, :new, :show ]
   end
 end

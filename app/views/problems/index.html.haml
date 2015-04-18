@@ -6,3 +6,4 @@
         %tbody
           - @problems.each do |problem|
             %tr= render problem
+  %p= link_to "New Problem", new_problem_path
