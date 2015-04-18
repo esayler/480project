@@ -2,11 +2,12 @@
 
 FactoryGirl.define do
   factory :problem do
-    name "problem_name"
-    language "python"
-    difficulty "easy"
-    pid "0001"
-    description "Hello, World!"
-    author "Professor X"
+    user_id 1
+    #sequence(:user_id) { |n| n }
+    name { Faker::Lorem.word }
+    language { Faker::Lorem.word }
+    difficulty { Faker::Lorem.word }
+    description { Faker::Lorem.paragraph(2, false, 4) }
   end
+
 end
