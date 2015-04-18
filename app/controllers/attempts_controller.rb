@@ -19,6 +19,7 @@ class AttemptsController < ApplicationController
         a.user_id = current_user.id
     	@problem = Problem.find(params[:problem_id])
     	a.problem_id = @problem.id
+        a.grade = -1
         if a.save
             flash[:notice] = "Attempt submitted successfully!"
             redirect_to problem_attempts_path(@problem.id)
