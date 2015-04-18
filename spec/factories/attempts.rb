@@ -8,7 +8,7 @@ FactoryGirl.define do
     submission { Faker::Hacker.say_something_smart }
   end
 
-  factory :invalid_attempt do
+  factory :invalid_attempt, class: 'Attempt' do
     #user_id nil
     submission nil
   end
