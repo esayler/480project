@@ -24,7 +24,7 @@ en:
   pundit:
       user_policy:
         index?: "You're not an administrator!"
-        show?: "You're not authorized to view that profile"
+        show?: "You're not authorized to view that profile!"
         update?: "You're not an administrator!"
         destroy?: "You're not an administrator!"
       attempt_policy:
