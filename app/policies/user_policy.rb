@@ -8,7 +8,8 @@ class UserPolicy
   end
 
   def index?
-    @current_user.admin? or @current_user.alum? or @current_user.prof?
+    true
+    #@current_user.admin? or @current_user.alum? or @current_user.prof?
   end
 
   def show?
@@ -16,7 +17,8 @@ class UserPolicy
   end
 
   def update?
-    @current_user.admin?
+    true
+    #@current_user.admin?
   end
 
   def edit?
@@ -26,5 +28,16 @@ class UserPolicy
   def destroy?
     return false if @current_user == @user
     @current_user.admin?
+  end
+end
+
+class Scope < Struct.new(:current_user, :model)
+  def resolve
+    if current_user.admin? or current_user.alum? or current_user.prof?
+      model.all
+    else
+      #model.where(role: current_user.role)
+      model.all
+    end
   end
 end

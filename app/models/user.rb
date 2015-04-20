@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
 
   end
 
-
+  
   def password_required?
     super && self.provider.blank?
   end
@@ -28,6 +28,15 @@ class User < ActiveRecord::Base
   def set_default_role
     self.role ||= :student
   end
+
+  def get_attempts
+    return self.attempts
+  end
+
+  def get_problems
+    return self.problems
+  end
+
 
 
   devise :database_authenticatable, :registerable,

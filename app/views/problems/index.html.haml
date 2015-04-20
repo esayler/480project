@@ -1,9 +1,22 @@
 .container
   .row
-    %h3 Problems
-    .column
-      %table.table
+    %h2
+      Problems
+      %small All
+    %p= link_to "Create a new problem", new_problem_path
+
+    %div.table-responsive
+      %table.table.table-striped
+        %thead
+          %tr
+            %th Name
+            %th Description
+            %th Language
+            %th Difficulty
         %tbody
           - @problems.each do |problem|
-            %tr= render problem
-  %p= link_to "New Problem", new_problem_path
+            %tr
+              %td= link_to problem.name, problem
+              %td= problem.description
+              %td= problem.language
+              %td= problem.difficulty
