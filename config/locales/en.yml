@@ -21,3 +21,21 @@
 
 en:
   hello: "Hello world"
+  pundit:
+      user_policy:
+        index?: "You're not an administrator!"
+        show?: "You're not authorized to view that profile"
+        update?: "You're not an administrator!"
+        destroy?: "You're not an administrator!"
+      attempt_policy:
+        edit?: "You're not allowed to edit a submission!"
+        update?: "You're not authorized to update a submission!"
+        destroy?: "You're not authorized to remove a submission!"
+      problem_policy:
+        new?: "You're not allowed to create a new problem!"
+        create?: "You're not allowed to create a new problem!"
+        edit?: "You're not authorized to edit this problem!"
+        update?: "You're not authorized to make changes to this problem!"
+        destroy?: "You're not authorized to delete this problem!"
+
+

@@ -1,6 +1,6 @@
 class AttemptsController < ApplicationController
-
   before_filter :authenticate_user!
+  after_action :verify_authorized, except: [:index, :show, :new, :create]
 
   def index
     @problem = Problem.find(params[:problem_id])
@@ -36,10 +36,12 @@ class AttemptsController < ApplicationController
   def edit
     @problem = Problem.find(params[:problem_id])
     @attempt = Attempt.find(params[:id])
+    authorize @attempt
   end
 
   def update
     @attempt = Attempt.find(params[:id])
+    authorize @attempt
 
     if @attempt.update(update_params)
       flash[:notice] = "The attempt was graded successfully."
@@ -48,6 +50,13 @@ class AttemptsController < ApplicationController
       flash[:warning] = "The attempt was not graded successfully"
       redirect_to problem_attempt_path(@attempt.problem_id, @attempt.id)
     end
+  end
+
+  def destroy
+    attempt = Attempt.find(params[:id])
+    authorize attempt
+    attempt.destroy
+    redirect_to problems_path, :notice => "Attempt successfully deleted."
   end
 
   private

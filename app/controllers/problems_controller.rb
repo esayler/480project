@@ -1,5 +1,7 @@
 class ProblemsController < ApplicationController
   before_filter :authenticate_user!
+  after_action :verify_authorized, except: [:index, :show]
+
   def index
     @problems = Problem.all
   end
@@ -10,16 +12,41 @@ class ProblemsController < ApplicationController
 
   def new
     @problem = Problem.new
+    authorize @problem
   end
 
   def create
-    if @problem = current_user.problems.create(create_params)
+    @problem = current_user.problems.create(create_params)
+    authorize @problem
+
+    if @problem
       flash[:notice] = "New problem #{@problem.name} created successfully"
       redirect_to problems_path
     else
       flash[:warning] = "Problem couldn't be created"
       redirect_to new_problem_path
     end
+  end
+
+  def edit
+    @problem = Problem.find(params[:id])
+  end
+
+  def update
+    @problem = Problem.find(params[:id])
+    authorize @problem
+    if @user.update_attributes(secure_params)
+      redirect_to users_path, :notice => "Account for #{@user.name} was successfully updated."
+    else
+      redirect_to users_path, :alert => "Unable to update user account for #{@user.name}."
+    end
+  end
+
+  def destroy
+    problem = Problem.find(params[:id])
+    authorize problem
+    problem.destroy
+    redirect_to problems_path, :notice => "Problem successfully deleted."
   end
 
   private
