@@ -16,7 +16,7 @@ class ProblemsController < ApplicationController
   end
 
   def create
-    @problem = current_user.problems.create(create_params)
+    @problem = current_user.problems.create(secure_params)
     authorize @problem
 
     if @problem
