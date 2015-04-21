@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :user do
     provider "google_oauth2"
+    sequence(:id) { |n| n }
     uid { Faker::Number.number(10) }
     name { Faker::Name.name }
     email { Faker::Internet.email }

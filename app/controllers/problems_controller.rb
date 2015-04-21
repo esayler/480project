@@ -30,15 +30,16 @@ class ProblemsController < ApplicationController
 
   def edit
     @problem = Problem.find(params[:id])
+    authorize @problem
   end
 
   def update
     @problem = Problem.find(params[:id])
     authorize @problem
-    if @user.update_attributes(secure_params)
-      redirect_to users_path, :notice => "Account for #{@user.name} was successfully updated."
+    if @problem.update_attributes(secure_params)
+      redirect_to problems_path, :notice => "Problem \"#{@problem.name}\" was successfully updated!"
     else
-      redirect_to users_path, :alert => "Unable to update user account for #{@user.name}."
+      redirect_to problems_path, :alert => "Unable to update problem \"#{@problem.name}\" account for #{@user.name}."
     end
   end
 
@@ -50,7 +51,7 @@ class ProblemsController < ApplicationController
   end
 
   private
-  def create_params
+  def secure_params
     params.require(:problem).permit(:name, :description, :difficulty)
   end
 

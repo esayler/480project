@@ -1,0 +1,7 @@
+=form_for [@problem, @attempt] do |f|
+  %br
+  =f.label :submission
+  =f.text_area :submission, :required => true
+  %br
+  =f.submit "Submit Attempt"
+=link_to "Return to Problem", problem_path(@problem.id)

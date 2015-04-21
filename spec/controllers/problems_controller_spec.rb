@@ -1,6 +1,9 @@
-RSpec.describe ProblemsController, :type => :controller do
+describe ProblemsController do
 
   before :each do
+
+    let (:user) { FactoryGirl.create :user, :student }
+
     @user = create(:user, id: 1)
     @attempt1 = create(:attempt, problem_id: 1)
     @attempt2 = create(:attempt, problem_id: 1)

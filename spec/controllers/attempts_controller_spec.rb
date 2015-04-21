@@ -1,4 +1,4 @@
-RSpec.describe AttemptsController, :type => :controller do
+describe AttemptsController do
 
   before :each do
     allow(controller).to receive(:authenticate_user!).and_return(true)

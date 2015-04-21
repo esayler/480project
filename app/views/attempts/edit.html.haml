@@ -11,10 +11,5 @@
   Submission: #{@attempt.submission if @attempt}
 
 %p
-  =form_for [@problem, @attempt] do |f|
-    %br
-    =f.label :grade
-    =f.number_field :grade, :required => true, in: 0..10
-    %br
-    =f.submit "Update Grade"
+  = render attempt_form
 %p= link_to "Back to the attempt", problem_attempt_path(@attempt.problem_id, @attempt.id)

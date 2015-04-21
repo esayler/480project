@@ -1,10 +1,12 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-  after_action :verify_authorized, except: [:index, :new]
-  after_action :verify_policy_scoped, :only => :index
+  after_action :verify_authorized, except: [:new]
+  #after_action :verify_policy_scoped, :only => :index
 
   def index
-    @users = policy_scope(User)
+    #@users = policy_scope(User)
+     @users = User.all
+     authorize User
   end
 
   def show
