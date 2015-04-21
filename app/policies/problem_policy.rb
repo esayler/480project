@@ -19,6 +19,10 @@ class ProblemPolicy
     @current_user.admin? or @current_user.alum? or @current_user.prof?
   end
 
+  def create?
+    @current_user.admin? or @current_user.alum? or @current_user.prof?
+  end
+
   def edit?
     @current_user.admin? or @current_user.alum? or @current_user.prof?
   end
