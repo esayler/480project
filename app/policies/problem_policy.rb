@@ -7,6 +7,14 @@ class ProblemPolicy
     @problem = model
   end
 
+  def index?
+    true
+  end
+
+  def show?
+    true
+  end
+
   def new?
     @current_user.admin? or @current_user.alum? or @current_user.prof?
   end

@@ -16,13 +16,13 @@ class UserPolicy
     @current_user.admin? or @current_user == @user or @current_user.alum? or @current_user.prof?
   end
 
+  def edit?
+    @current_user.admin?
+  end
+
   def update?
     true
     #@current_user.admin?
-  end
-
-  def edit?
-    @current_user.admin?
   end
 
   def destroy?

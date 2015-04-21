@@ -1,5 +1,3 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :problem do
     user_id 1
@@ -9,7 +7,7 @@ FactoryGirl.define do
     difficulty { Faker::Lorem.word }
     description { Faker::Lorem.paragraph(2, false, 4) }
   end
-  
+
   factory :invalid_problem, class: 'Problem' do
     name nil
   end
