@@ -21,8 +21,7 @@ class UserPolicy
   end
 
   def update?
-    true
-    #@current_user.admin?
+    @current_user.admin?
   end
 
   def destroy?
