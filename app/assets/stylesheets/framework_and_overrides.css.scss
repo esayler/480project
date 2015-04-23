@@ -37,6 +37,9 @@ main {
   margin-right: 50px;
   margin-left: 50px;
   margin-top: 51px; // accommodate the navbar
+  border-radius: 15px;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
   }
 .container-narrow {
     background: url(../images/cream_dust.png) repeat 0 0;
