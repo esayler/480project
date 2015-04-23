@@ -33,12 +33,13 @@ img {
 // apply styles to HTML elements
 // to make views framework-neutral
 main {
-  @extend .container;
-  background-color: #fffff;
-  padding-bottom: 80px;
-  width: 100%;
+  background-color: #ffffff;
   margin-top: 51px; // accommodate the navbar
   }
+.container-narrow {
+    background: url(../images/cream_dust.png) repeat 0 0;
+    padding: 25px 50px;
+}
 section {
   @extend .row;
   margin-top: 20px;
