@@ -66,3 +66,5 @@ group :test do
   gem 'faker'
   gem 'shoulda-matchers', require: false
 end
+
+ruby "2.2.0"

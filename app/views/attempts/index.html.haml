@@ -5,4 +5,8 @@
       %table.table
         %tbody
           - @attempts.each do |attempt|
-            %tr= render attempt
+            %tr
+              %td= link_to attempt.user.name, user_path(attempt.user_id)
+              %td= link_to attempt.submission.slice(0,20) + "...", problem_attempt_path(attempt.problem_id, attempt.id)
+              %td= link_to attempt.show_grade, edit_problem_attempt_path(attempt.problem_id, attempt.id) 
+  %p= link_to "Back to the problem", problem_path(@problem.id)

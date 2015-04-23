@@ -6,7 +6,10 @@
   %br
   Description: #{@problem.description if @problem}
   %br
-  Author: #{@problem.author if @problem}
-  %br
-  =link_to "Submit an Attempt", new_problem_attempt_path(@problem.id)
+  Author: #{@problem.user.name if @problem}
+  %br= "Language: " + @problem.language if @problem.language
+%p= link_to "Edit Problem", edit_problem_path(@problem.id)
+%p= link_to "Submit an Attempt", new_problem_attempt_path(@problem.id)
+%p= link_to "View Attempts", problem_attempts_path(@problem.id)
+%p= link_to "Return to all problems", problems_path
 

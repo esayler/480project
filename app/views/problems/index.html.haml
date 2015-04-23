@@ -1,8 +1,26 @@
 .container
   .row
-    %h3 Problems
-    .column
-      %table.table
+    %h2
+      Problems
+      %small All
+    %p= link_to "Create a new problem", new_problem_path
+
+    %div.table-responsive
+      %table.table.table-striped
+        %thead
+          %tr
+            %th Name
+            %th Description
+            %th Language
+            %th Difficulty
         %tbody
           - @problems.each do |problem|
-            %tr= render problem
+            %tr
+              %td= link_to problem.name, problem
+              %td= problem.description
+              %td= problem.language
+              %td= problem.difficulty
+              - if policy(User).destroy? && policy(User).edit?
+                %td= link_to 'Edit', edit_problem_path(problem.id)
+                %td= link_to 'Delete', problem_path(problem.id), method: :delete, :data => {:confirm => 'Are you sure?'}
+

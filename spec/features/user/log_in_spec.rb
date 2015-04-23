@@ -3,7 +3,7 @@
 #   I want to log in
    #So I can visit protected areas of the site
 feature 'Log in', :omniauth do
-
+  
   #before do
     #request.env["devise.mapping"] = Devise.mappings[:user] # If using Devise
     #request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2] 

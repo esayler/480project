@@ -1,0 +1,15 @@
+#main
+%h3 Grade
+%p
+  Problem: #{@problem.name if @problem}
+  %br
+  Difficulty: #{@problem.difficulty if @problem}
+  %br
+  Description: #{@problem.description if @problem}
+  %br= "Language: " + @problem.language if @problem.language
+%p
+  Submission: #{@attempt.submission if @attempt}
+
+%p
+  = render attempt_form
+%p= link_to "Back to the attempt", problem_attempt_path(@attempt.problem_id, @attempt.id)

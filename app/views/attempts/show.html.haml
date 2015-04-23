@@ -1,5 +1,9 @@
 %h3 Attempt
 %p
-  Name: #{@attempt.user_id}
-  Problem:
+  Name: #{@attempt.user.name}
+  %br
+  Problem: #{@attempt.problem.name}
+  %br
   Submission: #{@attempt.submission if @attempt}
+%p= link_to "Grade this Attempt", edit_problem_attempt_path(@attempt.problem_id, @attempt.id)
+%p= link_to "Back to all attempts", problem_attempts_path(@attempt.problem_id)
