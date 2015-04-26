@@ -1,0 +1,14 @@
+- if policy(current_user).index?
+  %li= link_to 'Users', users_path
+%li= link_to 'Problems', problems_path
+%li.dropdown
+  %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+    = current_user.name
+    %b.caret
+  %ul.dropdown-menu
+    %li= link_to 'My Attempts'
+    -if policy(Problem)
+      %li= link_to 'My Problems'
+    %li= link_to 'Edit My Profile', edit_user_registration_path
+    %li= link_to 'Log out', destroy_user_session_path, :method => :delete
+

@@ -1,9 +1,5 @@
 %li= link_to 'About', page_path('about')
 - if user_signed_in?
-  - if policy(current_user).index?
-    %li= link_to 'Users', users_path
-  %li= link_to 'Problems', problems_path
-  %li= link_to 'Edit account', edit_user_registration_path
-  %li= link_to 'Log out', destroy_user_session_path, :method => :delete
+  = render "layouts/user_logged_in_navigation_links"
 - else
-  %li= link_to 'Log in', user_omniauth_authorize_path(:google_oauth2)
+  %li= link_to 'Google Log in', user_omniauth_authorize_path(:google_oauth2)

@@ -1,9 +1,11 @@
 .container
   .row
-    %h2
-      Problems
-      %small All
-    %p= link_to "Create a new problem", new_problem_path
+    .page-header
+      %h2
+        Problems
+        %small All
+    -if policy(Problem).new?
+      = button_to 'Create a New Problem', new_problem_path, class: 'btn btn-sm btn-primary'
 
     %div.table-responsive
       %table.table.table-striped
@@ -20,8 +22,10 @@
               %td= problem.description
               %td= problem.language
               %td= problem.difficulty
-              %td= link_to "Attempts", problem_attempts_path(problem.id)
-              - if policy(User).destroy? && policy(User).edit?
-                %td= link_to 'Edit', edit_problem_path(problem.id)
-                %td= link_to 'Delete', problem_path(problem.id), method: :delete, :data => {:confirm => 'Are you sure?'}
+              %td=button_to 'Attempts', problem_attempts_path(problem.id), method: :get, class: 'btn btn-xs btn-default'
+              - if policy(User).edit?
+                %td= button_to 'Edit', edit_problem_path(problem.id), method: :get, class: 'btn btn-xs btn-warning'
+              - if policy(User).destroy?
+                %td= button_to 'Delete', problem_path(problem.id), method: :delete, :data => {:confirm => 'Are you sure?'}, class: 'btn btn-xs btn-danger'
+
 
