@@ -24,7 +24,7 @@
               %td= problem.difficulty
               %td=button_to 'Attempts', problem_attempts_path(problem.id), method: :get, class: 'btn btn-xs btn-default'
               - if policy(User).edit?
-                %td= button_to 'Edit', edit_problem_path(problem.id), method: :get, class: 'btn btn-xs btn-warning'
+                %td= button_to 'Edit', edit_problem_path(problem.id), method: :get, class: 'btn btn-xs btn-primary'
               - if policy(User).destroy?
                 %td= button_to 'Delete', problem_path(problem.id), method: :delete, :data => {:confirm => 'Are you sure?'}, class: 'btn btn-xs btn-danger'
 

@@ -1,8 +1,23 @@
 .container
   .row
-    %h3 Users
-    .column
-      %table.table
+    .page-header
+      %h3 All Users
+    %div.table-responsive
+      %table.table.table-striped
+        %thead
+          %tr
+            %th Name
+            %th Role
         %tbody
           - @users.each do |user|
-            %tr= render user
+            %tr
+              %td= link_to user.email, user
+              %td
+                = form_for(user) do |f|
+                  = f.select(:role, User.roles.keys.map {|role| [role.titleize,role]})
+                  = f.submit 'Change Role', class: 'btn btn-primary btn-xs'
+              %td= button_to('Delete User',
+                user_path(user),
+                :data => { :confirm => "Are you sure?" },
+                :method => :delete, :class => 'btn btn-danger btn-xs') unless user == current_user
+
