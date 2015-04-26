@@ -5,7 +5,7 @@
         Problems
         %small All
     -if policy(Problem).new?
-      = button_to 'Create a New Problem', new_problem_path, class: 'btn btn-sm btn-primary'
+      = button_to 'Create a New Problem', new_problem_path, method: :get, class: 'btn btn-sm btn-primary'
 
     %div.table-responsive
       %table.table.table-striped
