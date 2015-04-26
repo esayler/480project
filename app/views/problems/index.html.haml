@@ -20,6 +20,7 @@
               %td= problem.description
               %td= problem.language
               %td= problem.difficulty
+              %td= link_to "Attempts", problem_attempts_path(problem.id)
               - if policy(User).destroy? && policy(User).edit?
                 %td= link_to 'Edit', edit_problem_path(problem.id)
                 %td= link_to 'Delete', problem_path(problem.id), method: :delete, :data => {:confirm => 'Are you sure?'}

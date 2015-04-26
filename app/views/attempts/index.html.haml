@@ -4,6 +4,8 @@
     .column
       %table.table
         %tbody
+          - if @attempts.empty?
+            %h4 No attempts yet!
           - @attempts.each do |attempt|
             %tr
               %td= link_to attempt.user.name, user_path(attempt.user_id)
