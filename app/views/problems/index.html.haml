@@ -6,7 +6,7 @@
         %small All
     -if policy(Problem).new?
       = button_to 'Create a New Problem', new_problem_path, method: :get, class: 'btn btn-sm btn-primary'
-
+    -#= will_paginate @problems, renderer: BootstrapPagination::Rails
     %div.table-responsive
       %table.table.table-hover
         %thead
@@ -15,7 +15,7 @@
             %th Description
             %th Language
             %th Difficulty
-            %th # of Attempts
+            %th Attempts
         %tbody
           - @problems.each do |problem|
             %tr
@@ -28,3 +28,4 @@
                 %td= button_to 'Edit', edit_problem_path(problem.id), method: :get, class: 'btn btn-xs btn-primary'
               - if policy(User).destroy?
                 %td= button_to 'Delete', problem_path(problem.id), method: :delete, title: "Delete Problem ##{problem.id}: '#{problem.name}'", :data => {:confirm => 'Are you sure you want to delete this problem?', :commit => 'Delete', cancel: 'Cancel'}, class: 'btn btn-xs btn-danger'
+    = will_paginate @problems, renderer: BootstrapPagination::Rails

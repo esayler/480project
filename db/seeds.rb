@@ -5,3 +5,18 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+#
+#
+
+50.times do
+  Problem.create({name: Faker::App.name,
+                 language: "python",
+                 description: Faker::Hacker.say_something_smart,
+                 difficulty: 1,
+                 user_id: Faker::Number.digit})
+end
+
+
+
+
+

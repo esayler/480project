@@ -3,7 +3,7 @@ class ProblemsController < ApplicationController
   after_action :verify_authorized, except: [:index, :show]
 
   def index
-    @problems = Problem.all
+    @problems = Problem.all.paginate(:page => params[:page], :per_page => 10)
   end
 
   def show

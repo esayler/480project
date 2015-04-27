@@ -22,6 +22,8 @@ gem 'pundit'
 gem 'simple_form'
 gem 'therubyracer', :platform=>:ruby
 gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
+gem 'will_paginate', '~> 3.0.6'
+gem 'will_paginate-bootstrap'
 
 group :development do
   gem 'better_errors'
@@ -46,6 +48,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'spring'
   gem 'web-console', '~> 2.0'
+  gem 'faker'
   gem 'sqlite3'
 end
 
@@ -64,7 +67,6 @@ group :test do
   gem 'launchy'
   gem 'selenium-webdriver'
   gem 'factory_girl_rails'
-  gem 'faker'
   gem 'shoulda-matchers', require: false
 end
 
