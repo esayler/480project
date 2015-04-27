@@ -20,6 +20,11 @@
               %tr
                 %td= link_to attempt.user.name, user_path(attempt.user_id)
                 %td= link_to attempt.submission.slice(0,20) + "...", problem_attempt_path(attempt.problem_id, attempt.id)
-                %td= link_to attempt.show_grade, edit_problem_attempt_path(attempt.problem_id, attempt.id) 
+                - if attempt.grade == -1
+                  - if policy(attempt).edit?
+                    %td= button_to 'Grade attempt', edit_problem_attempt_path(attempt.problem_id, attempt.id), method: :get, class: 'btn btn-xs btn-primary'
+                  - else
+                    %p Not yet graded
+                - else attempt.grade
 
     %p= link_to "Back to the problem", problem_path(@problem.id)

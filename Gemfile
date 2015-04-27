@@ -21,6 +21,7 @@ gem 'omniauth-google-oauth2'
 gem 'pundit'
 gem 'simple_form'
 gem 'therubyracer', :platform=>:ruby
+gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 
 group :development do
   gem 'better_errors'

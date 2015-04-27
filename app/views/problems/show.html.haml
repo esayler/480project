@@ -1,15 +1,28 @@
-%h3 Problem
-%p
-  Problem: #{@problem.name if @problem}
-  %br
-  Difficulty: #{@problem.difficulty if @problem}
-  %br
-  Description: #{@problem.description if @problem}
-  %br
-  Author: #{@problem.user.name if @problem}
-  %br= "Language: " + @problem.language if @problem.language
-%p= link_to "Edit Problem", edit_problem_path(@problem.id)
-%p= link_to "Submit an Attempt", new_problem_attempt_path(@problem.id)
-%p= link_to "View Attempts", problem_attempts_path(@problem.id)
-%p= link_to "Return to all problems", problems_path
+.container
+  .page-header
+    %h2 View Problem
+    %p.lead= @problem.name
+  .row
+    .col-lg-4
+      .well
+        - if @problem
+          %h3 Name
+          %p= @problem.name
+          %h3 Difficulty
+          %p= @problem.difficulty
+          %h3 Description
+          %p= @problem.description
+          %h3 Author
+          %p= @problem.user.name
+          - unless @problem.language.blank?
+            %h5 Language
+            %p= @problem.language if @problem.language
+        - else
+          %h3 No Problem Found!
+
+    .col-lg-8
+      %p= link_to "Edit Problem", edit_problem_path(@problem.id)
+      %p= link_to "Submit an Attempt", new_problem_attempt_path(@problem.id)
+      %p= link_to "View Attempts", problem_attempts_path(@problem.id)
+      %p= link_to "Return to all problems", problems_path
 
