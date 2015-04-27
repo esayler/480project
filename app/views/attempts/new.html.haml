@@ -1,8 +1,9 @@
-#main 
-  Problem: #{@problem.name if @problem}
-  %br
-  Difficulty: #{@problem.difficulty if @problem}
-  %br
-  Description: #{@problem.description if @problem}
-  %br
+.container
+  - breadcrumb :new_attempt, @problem
+  .page-header
+    %h2 New Attempt
+
+  %h3 Problem: #{@problem.name if @problem}
+  %p Difficulty: #{@problem.difficulty if @problem}
+  %p Description: #{@problem.description if @problem}
   =render partial: 'attempt_form'

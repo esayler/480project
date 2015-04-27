@@ -1,5 +1,8 @@
-#main
-  %h2 Edit Problem
+.container
+  - breadcrumb :edit_problem, @problem
+  .page-header
+    %h1 Edit Problem
+    %p.lead= @problem.name.titleize
   = render partial: 'problem_form'
   %br
   =link_to "Back to Problems", problems_path

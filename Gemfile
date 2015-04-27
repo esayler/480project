@@ -24,9 +24,11 @@ gem 'therubyracer', :platform=>:ruby
 gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 gem 'will_paginate', '~> 3.0.6'
 gem 'will_paginate-bootstrap'
+gem 'gretel'
 
 group :development do
   gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
