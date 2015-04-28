@@ -10,6 +10,7 @@
   %body
     %header
       = render 'layouts/navigation'
+      = image_tag "../images/logo.gif", :id =>"logo"
     %main{:role => "main"}
       = render 'layouts/messages'
       = breadcrumbs style: :bootstrap
