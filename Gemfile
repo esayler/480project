@@ -10,7 +10,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 #gem 'capistrano-rails', group: :development
-gem 'countdown'
+gem 'jquery-countdown-rails'
 gem 'bootstrap-sass'
 gem 'figaro', '>= 1.0.0.rc1'
 gem 'haml-rails'
