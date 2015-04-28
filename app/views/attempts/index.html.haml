@@ -26,6 +26,7 @@
                     %td= button_to 'Grade attempt', edit_problem_attempt_path(attempt.problem_id, attempt.id), method: :get, class: 'btn btn-xs btn-primary'
                   - else
                     %p Not yet graded
-                - else attempt.grade
+                - else 
+                  %td= attempt.show_grade
 
     %p= link_to "Back to the problem", problem_path(@problem.id)
