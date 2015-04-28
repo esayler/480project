@@ -6,6 +6,7 @@ FactoryGirl.define do
     language { Faker::Lorem.word }
     difficulty { Faker::Lorem.word }
     description { Faker::Lorem.paragraph(2, false, 4) }
+    time_limit 60
   end
 
   factory :invalid_problem, class: 'Problem' do
