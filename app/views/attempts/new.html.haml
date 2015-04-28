@@ -7,3 +7,4 @@
   %p Difficulty: #{@problem.difficulty if @problem}
   %p Description: #{@problem.description if @problem}
   =render partial: 'attempt_form'
+  = content_tag :div, class: "temp_information", data: {minute: @minute} do end

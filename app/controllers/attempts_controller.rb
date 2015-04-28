@@ -23,6 +23,7 @@ class AttemptsController < ApplicationController
     a.grade = -1
     
     @problem = Problem.find(params[:problem_id])
+    @minute = @problem.time_limit
     a.problem_id = @problem.id
 
     if a.save
