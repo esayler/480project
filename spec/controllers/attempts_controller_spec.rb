@@ -67,14 +67,19 @@ describe AttemptsController do
     #user
     it "assigns a new Attempt to @attempt" do
       #TODO: change problem_id
-      get :new, problem_id: 1
+      get :new, problem_id: @problem1.id
       expect(assigns(:attempt)).to be_a_new(Attempt)
     end
 
     it "renders the :new template" do
       #TODO: change problem_id
-      get :new, problem_id: 1
+      get :new, problem_id: @problem1.id
       expect(response).to render_template :new
+    end
+
+    it "fails to render the :new template when a bad problem id is requested" do
+      get :new, problem_id: 0
+      expect(response).to_not render_template :new
     end
 
   end
@@ -84,15 +89,21 @@ describe AttemptsController do
     it "assigns the requested attempt to @attempt" do
       attempt = create(:attempt)
       #TODO: change problem_id
-      get :edit, id: attempt, problem_id: 1
+      get :edit, id: attempt, problem_id: @problem1.id
       expect(assigns(:attempt)).to eq attempt
     end
 
     it "renders the :edit template" do
       attempt = create(:attempt)
       #TODO: change problem_id
-      get :edit, id: attempt, problem_id: 1
+      get :edit, id: attempt, problem_id: @problem1.id
       expect(response).to render_template :edit
+    end
+
+    it "fails to render the :edit template when a bad problem id is requested" do
+      attempt = create(:attempt)
+      get :edit, id: attempt, problem_id: 0
+      expect(response).to_not render_template :edit
     end
 
   end
@@ -142,33 +153,45 @@ describe AttemptsController do
   describe 'PATCH #update' do
     #grade
     before :each do
-      @attempt3 = create(:attempt)
+      @attempt4 = create(:attempt)
       create(:problem, id: 1)
     end
 
     context "with valid attributes" do
 
       it "locates the requested @attempt" do
-        patch :update, id: @attempt3, attempt: attributes_for(:attempt)
-        expect(assigns(:attempt)).to eq(@attempt3)
+        patch :update, id: @attempt4, attempt: attributes_for(:attempt)
+        expect(assigns(:attempt)).to eq(@attempt4)
       end
 
       it "changes @attempt's attributes" do
-        patch :update, problem_id: 1, id: @attempt3,
+        patch :update, problem_id: 1, id: @attempt4,
           attempt: attributes_for(:attempt, grade: 10)
-        @attempt3.reload
-        expect(@attempt3.grade).to eq(10)
+        @attempt4.reload
+        expect(@attempt4.grade).to eq(10)
       end
 
-      it "redirects to the updated attempt" do
-        patch :update, id: @attempt3, attempt: attributes_for(:attempt)
-        expect(response).to redirect_to @attempt3
+      it "redirects to show the updated attempt" do
+        patch :update, id: @attempt4, attempt: attributes_for(:attempt)
+        expect(response).to redirect_to problem_attempt_path(@attempt4.problem_id, @attempt4.id)
       end
 
     end
 
     context "with invalid attributes" do
-      skip
+
+      it "doesn't change @attempt's grade" do
+        patch :update, problem_id: 1, id: @attempt4,
+          attempt: attributes_for(:attempt, grade: 11)
+        @attempt4.reload
+        expect(@attempt4.grade).to eq(-1)
+      end
+
+      it "redirects to the grading page for the ungraded attempt" do
+        patch :update, id: @attempt4, attempt: attributes_for(:attempt, grade: -1)
+        expect(response).to redirect_to edit_problem_attempt_path(@attempt4.problem_id, @attempt4.id)
+      end
+
     end
 
   end
@@ -176,18 +199,18 @@ describe AttemptsController do
   describe 'DELETE #destroy', skip: "feature not implemented yet" do
     # admin
     before :each do
-      @attempt4 = create(:attempt)
+      @attempt5 = create(:attempt)
     end
 
     it 'deletes the attempt' do
       expect{
-        delete :destroy, id: @attempt4
+        delete :destroy, id: @attempt5
       }.to change(Attempt, :count).by(-1)
     end
 
     it "redirects to attempts#index" do
-      delete :destroy, id: @attempt4
-      expect(response).to redirect_to attempts_path
+      delete :destroy, id: @attempt5
+      expect(response).to redirect_to problem_attempts_path(@attempt5.problem_id)
     end
 
   end
