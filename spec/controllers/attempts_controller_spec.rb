@@ -3,27 +3,34 @@ describe AttemptsController do
   before :each do
     allow(controller).to receive(:authenticate_user!).and_return(true)
     @user = create(:user, id: 1)
+    @problem1 = create(:problem, id: 1)
+    @problem2 = create(:problem, id: 2)
     @attempt1 = create(:attempt, problem_id: 1)
     @attempt2 = create(:attempt, problem_id: 1)
-    @problem = create(:problem, id: 1)
+    @attempt3 = create(:attempt, problem_id: 2)
     allow(controller).to receive(:current_user){ @user }
   end
 
   describe "GET #index" do
     #user
     it "routes correctly" do
-      get :index, problem_id: @problem.id
+      get :index, problem_id: @problem1.id
       expect(response.status).to eq(200)
     end
 
     it "populates an array of all attempts regardless of problem_id" do
-      get :index, problem_id: @problem.id
+      get :index, problem_id: @problem1.id
       expect(assigns(:attempts)).to match_array([@attempt1, @attempt2])
     end
 
     it "renders the :index template" do
-      get :index, problem_id: @problem.id
+      get :index, problem_id: @problem1.id
       expect(response).to render_template :index
+    end
+
+    it "fails to route correctly when a bad problem id is requested" do
+      get :index, problem_id: 0
+      expect(response.status).to_not eq(200)
     end
 
   end
@@ -31,8 +38,8 @@ describe AttemptsController do
   describe "GET #show" do
     #user
     it "assigns the requested attempt to @attempt" do
-      #get :index, problem_id: @problem.id
-      get :show, problem_id: @problem.id, id: @attempt1.id
+      #get :index, problem_id: @problem1.id
+      get :show, problem_id: @problem1.id, id: @attempt1.id
       expect(assigns(:attempt)).to eq @attempt1
     end
 
@@ -40,13 +47,18 @@ describe AttemptsController do
       #problem = create(:problem)
       #attempt = create(:attempt, problem: problem)
       #get :show, id: attempt, problem_id: problem.id
-      get :show, problem_id: @problem.id, id: @attempt1.id
+      get :show, problem_id: @problem1.id, id: @attempt1.id
       expect(response).to render_template :show
     end
 
     it "routes correctly" do
-      get :show, problem_id: @problem.id, id: @attempt1.id
+      get :show, problem_id: @problem1.id, id: @attempt1.id
       expect(response.status).to eq(200)
+    end
+
+    it "fails to render when an invalid attempt id is requested" do
+      get :show, problem_id: @problem1.id, id: 0
+      expect(response.status).to_not eq(200)
     end
 
   end
@@ -92,13 +104,13 @@ describe AttemptsController do
       it "saves the new attempt to the database" do
         expect{
           post :create,
-          problem_id: @problem.id,
+          problem_id: @problem1.id,
           attempt: attributes_for(:attempt)
         }.to change(Attempt, :count).by(1)
       end
 
       it "redirects to attempts#show" do
-        post :create, problem_id: @problem.id, attempt: attributes_for(:attempt)
+        post :create, problem_id: @problem1.id, attempt: attributes_for(:attempt)
         expect(response).to redirect_to problem_attempts_path(assigns[:problem])
         #expect(response).to have_content("Attempt successfully submitted")
       end
@@ -110,14 +122,14 @@ describe AttemptsController do
       it "does not save the new attempt in the database" do
         expect{
           post :create,
-          problem_id: @problem.id,
+          problem_id: @problem1.id,
           attempt: attributes_for(:invalid_attempt)
         }.not_to change(Attempt, :count)
       end
 
       it "re-renders the :new template" do
         post :create,
-          problem_id: @problem.id,
+          problem_id: @problem1.id,
           attempt: attributes_for(:invalid_attempt)
         expect(response).to render_template :new
         #expect(response).to have_content("Attempt failed to be submitted")
