@@ -30,7 +30,7 @@ describe AttemptsController do
 
     it "fails to route correctly when a bad problem id is requested" do
       get :index, problem_id: 0
-      expect(response.status).to_not eq(200)
+      expect(response.status).to redirect_to problems_path
     end
 
   end
@@ -58,7 +58,7 @@ describe AttemptsController do
 
     it "fails to render when an invalid attempt id is requested" do
       get :show, problem_id: @problem1.id, id: 0
-      expect(response.status).to_not eq(200)
+      expect(response.status).to redirect_to problem_attempts_path(@problem1.id)
     end
 
   end
@@ -79,7 +79,7 @@ describe AttemptsController do
 
     it "fails to render the :new template when a bad problem id is requested" do
       get :new, problem_id: 0
-      expect(response).to_not render_template :new
+      expect(response).to redirect_to problems_path
     end
 
   end
@@ -103,7 +103,7 @@ describe AttemptsController do
     it "fails to render the :edit template when a bad problem id is requested" do
       attempt = create(:attempt)
       get :edit, id: attempt, problem_id: 0
-      expect(response).to_not render_template :edit
+      expect(response).to redirect_to problems_path
     end
 
   end
