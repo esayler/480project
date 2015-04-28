@@ -2,7 +2,6 @@
   - breadcrumb :new_attempt, @problem
   .page-header
     %h2 New Attempt
-  <%= countdown Time.now + 28.hours %>
   %h3 Problem: #{@problem.name if @problem}
   %p Difficulty: #{@problem.difficulty if @problem}
   %p Description: #{@problem.description if @problem}
