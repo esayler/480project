@@ -161,6 +161,7 @@ GEM
     jbuilder (2.2.11)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
+    jquery-countdown-rails (2.0.2)
     jquery-rails (4.0.3)
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
@@ -398,6 +399,7 @@ DEPENDENCIES
   high_voltage
   html2haml
   jbuilder (~> 2.0)
+  jquery-countdown-rails
   jquery-rails
   launchy
   omniauth
