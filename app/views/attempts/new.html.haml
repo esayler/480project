@@ -2,9 +2,17 @@
   - breadcrumb :new_attempt, @problem
   .page-header
     %h2 New Attempt
-  %div{:id=>"until2d"}
-  %h3 Problem: #{@problem.name if @problem}
-  %p Difficulty: #{@problem.difficulty if @problem}
-  %p Description: #{@problem.description if @problem}
-  =render partial: 'attempt_form'
+  .row
+    %div{:id=>"until2d"}
+  .row
+    %h3 Problem: #{@problem.name if @problem}
+    %p Difficulty: #{@problem.difficulty if @problem}
+    %p Description: #{@problem.description if @problem}
+  .panel.panel-default
+    .panel-heading
+      .h2.panel-title Code Editor
+    .panel-body
+      .col#editor
+  = render partial: 'attempt_form'
   = content_tag :div, class: "temp_information", data: {minute: @minute} do end
+

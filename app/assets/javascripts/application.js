@@ -11,10 +11,14 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
-//= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
 //= require data-confirm-modal
 //= require jquery.countdown
 //= require jquery.countdown-es
+//= ace.require ./ace
+//= ace.require ./mode-html
+//= ace.require ./theme-textmate
+//= require turbolinks

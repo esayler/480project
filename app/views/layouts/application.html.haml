@@ -1,7 +1,9 @@
 !!!
-%html
+%html{:lang => "en"}
   %head
+    %meta{:charset => "UTF-8"}/
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+    %meta{:content => "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible"}/
     %title= content_for?(:title) ? yield(:title) : 'Project'
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Project'}"}
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
@@ -10,7 +12,6 @@
   %body
     %header
       = render 'layouts/navigation'
-    = image_tag "../images/logo.gif", :id =>"logo"
     %main{:role => "main"}
       = render 'layouts/messages'
       = breadcrumbs style: :bootstrap
