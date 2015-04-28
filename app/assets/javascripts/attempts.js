@@ -1,5 +1,8 @@
 $(function () { 
-	var newYear = new Date(); 
-	newYear = new Date(newYear.getFullYear() + 1, 1 - 1, 1);
-	$('#until2d').countdown({until: newYear});
+	var minute = $('.temp_information').data('minute')
+	var oldDateObj = Date.now()
+	var newTime = new Date(oldDateObj + minute*60000);
+	console.log(minute);
+	console.log(newTime)
+	$('#until2d').countdown({until: newTime});
 });
