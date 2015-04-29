@@ -3,18 +3,18 @@ $(document).ready(function () {
     var minute = $('.temp_information').attr("data-minute");
     var oldDateObj = Date.now();
     var newTime = new Date(oldDateObj + minute*60000);
-    console.log(minute);
-    console.log(newTime)
-    $('#until2d').countdown({until: newTime, onTick: highlightLast5});
-
-
-    function highlightLast5(periods) { 
-        if ($.countdown.periodsToSeconds(periods) === 5) { 
-            $(this).addClass('highlight'); 
-        } 
-    } 
+    $('#until2d').countdown({until: newTime, onTick: highlightLast5,onExpiry: save}); 
 });
 
+function highlightLast5(periods) { 
+    if ($.countdown.periodsToSeconds(periods) === 5) { 
+        $(this).addClass('highlight'); 
+    } 
+}
+
+function save(){
+    $("input[name='commit']").trigger( "click" );
+}
 
 $(document).ready(function() {
     var editor = ace.edit("editor");
