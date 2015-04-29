@@ -16,9 +16,16 @@ function save(){
     $("input[name='commit']").trigger( "click" );
 }
 
+
 $(document).ready(function() {
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/tomorrow");
     editor.setDisplayIndentGuides(true)
     editor.getSession().setMode("ace/mode/python");
+    $('#attempt_form').submit(function() {
+        alert("here");
+        var code = editor.getSession().getValue();
+        console.log(code);
+        $('#attempt_submission').val(code);
+    });
 });
