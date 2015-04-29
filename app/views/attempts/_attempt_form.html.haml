@@ -1,6 +1,6 @@
-=form_for [@problem, @attempt] do |f|
+=form_for [@problem, @attempt],:html => {:id => "attempt_form"} do |f|
   %br
-  =f.hidden_field :submission
+  =f.hidden_field :submission, :id=>"attempt_submission"
   %br
-  =f.submit "Submit Attempt"
+  =f.submit "Submit Attempt",:id=> "attempt_submit"
 =link_to "Return to Problem", problem_path(@problem.id)
