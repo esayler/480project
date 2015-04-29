@@ -2,7 +2,7 @@
   - breadcrumb :new_attempt, @problem
   .page-header
     %h2 New Attempt
-  .row
+  %div{:id=>"countdownwrapper"}
     %div{:id=>"until2d"}
   .row
     %h3 Problem: #{@problem.name if @problem}

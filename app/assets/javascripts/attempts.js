@@ -5,7 +5,14 @@ $(document).ready(function () {
     var newTime = new Date(oldDateObj + minute*60000);
     console.log(minute);
     console.log(newTime)
-    $('#until2d').countdown({until: newTime});
+    $('#until2d').countdown({until: newTime, onTick: highlightLast5});
+
+
+    function highlightLast5(periods) { 
+        if ($.countdown.periodsToSeconds(periods) === 5) { 
+            $(this).addClass('highlight'); 
+        } 
+    } 
 });
 
 
