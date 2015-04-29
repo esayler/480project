@@ -2,7 +2,7 @@
   - breadcrumb :new_attempt, @problem
   .page-header
     %h2 New Attempt
-  .row
+  %div{:id=>"countdownwrapper"}
     %div{:id=>"until2d"}
   .row
     %h3 Problem: #{@problem.name if @problem}
@@ -14,5 +14,5 @@
     .panel-body
       .col#editor
   = render partial: 'attempt_form'
-  = content_tag :div, class: "temp_information", data: {minute: @minute} do end
+  = content_tag :div, class: "temp_information", data: {minute: @problem.time_limit} do end
 

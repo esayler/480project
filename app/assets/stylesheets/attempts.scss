@@ -15,7 +15,18 @@
     height: 300px;
     width: 90%;
 }
-
+#countdownwrapper{
+    border: 1px solid #ccc;
+    background-color: #eee;
+    height:150%;
+    overflow:hidden;
+}
+#until2d{
+    border: none;
+}
+.highlight{
+    color: red;
+}
 /*#ace-editor*/
     /*position: relative*/
     /*width: 100%*/
