@@ -14,5 +14,5 @@
     .panel-body
       .col#editor
   = render partial: 'attempt_form'
-  = content_tag :div, class: "temp_information", data: {minute: @minute} do end
+  = content_tag :div, class: "temp_information", data: {minute: @problem.time_limit} do end
 
