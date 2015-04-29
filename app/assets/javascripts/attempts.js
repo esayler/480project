@@ -23,7 +23,6 @@ $(document).ready(function() {
     editor.setDisplayIndentGuides(true)
     editor.getSession().setMode("ace/mode/python");
     $('#attempt_form').submit(function() {
-        alert("here");
         var code = editor.getSession().getValue();
         console.log(code);
         $('#attempt_submission').val(code);

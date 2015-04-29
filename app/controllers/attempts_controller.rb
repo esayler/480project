@@ -18,11 +18,12 @@ class AttemptsController < ApplicationController
   end
 
   def create
-    if (params[:submission]==nil)
-      params[:submission] = "Attempt not completed"
+    byebug
+    if (params[:attempt][:submission]==nil)
+      params[:attempt][:submission] = "Attempt not completed"
     end
     a = Attempt.new()
-    a.submission = params[:submission]
+    a.submission = params[:attempt][:submission]
     a.user_id = current_user.id
     a.grade = -1
     
