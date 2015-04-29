@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $.countdown.setDefaults($.countdown.regionalOptions['']);
     var minute = $('.temp_information').attr("data-minute");
     var oldDateObj = Date.now();
     var newTime = new Date(oldDateObj + minute*60000);
