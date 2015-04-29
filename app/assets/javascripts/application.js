@@ -17,7 +17,6 @@
 //= require_tree .
 //= require data-confirm-modal
 //= require jquery.countdown
-//= require jquery.countdown-es
 //= ace.require ./ace
 //= ace.require ./mode-html
 //= ace.require ./theme-textmate
