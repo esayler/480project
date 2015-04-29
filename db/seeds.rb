@@ -13,7 +13,7 @@
                  language: "python",
                  description: Faker::Hacker.say_something_smart,
                  difficulty: 1,
-                 user_id: Faker::Number.digit})
+                 user_id: 1})
 end
 
 
