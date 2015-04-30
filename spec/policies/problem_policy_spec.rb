@@ -8,8 +8,8 @@ describe ProblemPolicy, :pundit do
   let (:prof) { FactoryGirl.build_stubbed :user, :prof }
 
   permissions :index? do
-    it "denies access if not an admin" do
-      expect(subject).not_to permit(student)
+    it "allows access for a student" do
+      expect(subject).to permit(student)
     end
     it "allows access for an admin" do
       expect(subject).to permit(admin)

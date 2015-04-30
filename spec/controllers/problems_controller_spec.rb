@@ -2,7 +2,7 @@ describe ProblemsController do
 
   before :each do
 
-    let (:user) { FactoryGirl.create :user, :student }
+    #let (:user) { FactoryGirl.create :user, :student }
 
     @user = create(:user, id: 1)
     @attempt1 = create(:attempt, problem_id: 1)
@@ -45,7 +45,7 @@ describe ProblemsController do
     it "assigns a new problem to @problem" do
       #TODO: change problem_id
       get :new
-      expect(assigns(:problem)).to be_a_new(Attempt)
+      expect(assigns(:problem)).to be_a_new(Problem)
     end
 
     it "renders the :new template" do
@@ -101,7 +101,7 @@ describe ProblemsController do
 
       it "re-renders the :new template" do
         post :create, problem: attributes_for(:invalid_problem)
-        expect(response).to redirect_to new_problems_path
+        expect(response).to redirect_to new_problem_path
       end
 
     end

@@ -8,14 +8,14 @@ feature 'Edit profile', :devise do
   #   And I am not logged in
   #   When I log in
   #   Then I see the button to edit my account
-  scenario "user can see 'Edit account' when logged in" do
+  scenario "user can see 'Edit My Profile' when logged in" do
     login
-    expect(page).to have_content("Edit account")
+    expect(page).to have_content("Edit My Profile")
   end
 
-  scenario "user cannot see 'Edit account' when logged out" do
+  scenario "user cannot see 'Edit My Profile' when logged out" do
     visit root_path
-    expect(page).to_not have_content("Edit account")
+    expect(page).to_not have_content("Edit My Profile")
   end
 
   # Scenario: User can edit personal info when logged in
@@ -24,8 +24,8 @@ feature 'Edit profile', :devise do
   #   Then I see an authentication error message
   scenario 'user can visit an edit page when logged in' do
     login
-    expect(page).to have_content('Edit account')
-    click_on 'Edit account'
+    expect(page).to have_content('Edit My Profile')
+    click_on 'Edit My Profile'
     expect(page).to have_content('Edit User')
     expect(page).to have_css("button,right")
   end
