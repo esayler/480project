@@ -120,9 +120,9 @@ describe AttemptsController do
         }.to change(Attempt, :count).by(1)
       end
 
-      it "redirects to attempts#show" do
+      it "redirects to attempts#index" do
         post :create, problem_id: @problem1.id, attempt: attributes_for(:attempt)
-        expect(response).to redirect_to problem_attempts_path(assigns[:problem])
+        expect(response).to redirect_to problem_attempts_path(@problem1.id)
         #expect(response).to have_content("Attempt successfully submitted")
       end
 
