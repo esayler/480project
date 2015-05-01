@@ -14,7 +14,7 @@ class AttemptsController < ApplicationController
 
   def new
     @problem = Problem.find(params[:problem_id])
-    # @attempt = Attempt.new
+    @attempt = Attempt.new
   end
 
   def create
@@ -22,6 +22,7 @@ class AttemptsController < ApplicationController
       params[:attempt][:submission] = "Attempt not completed"
     end
     a = Attempt.new()
+    byebug
     a.submission = params[:attempt][:submission]
     a.user_id = current_user.id
     a.grade = -1
