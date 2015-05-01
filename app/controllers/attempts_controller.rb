@@ -18,7 +18,6 @@ class AttemptsController < ApplicationController
   end
 
   def create
-    byebug
     if (params[:attempt][:submission]==nil)
       params[:attempt][:submission] = "Attempt not completed"
     end
