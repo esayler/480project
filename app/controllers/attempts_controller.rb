@@ -14,7 +14,7 @@ class AttemptsController < ApplicationController
 
   def new
     @problem = Problem.find(params[:problem_id])
-    @attempt = Attempt.new
+    # @attempt = Attempt.new
   end
 
   def create

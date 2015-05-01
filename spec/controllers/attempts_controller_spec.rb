@@ -2,13 +2,14 @@ describe AttemptsController do
 
   before :each do
     allow(controller).to receive(:authenticate_user!).and_return(true)
-    @user = create(:user, id: 1)
-    @problem1 = create(:problem, id: 1)
-    @problem2 = create(:problem, id: 2)
-    @attempt1 = create(:attempt, problem_id: 1)
-    @attempt2 = create(:attempt, problem_id: 1)
-    @attempt3 = create(:attempt, problem_id: 2)
-    allow(controller).to receive(:current_user){ @user }
+    @prof = create(:user, id: 1, role: 2)#might be 1 for prof, i forget. 2 is alum o/w
+    @student = create(:user, id: 2, role: 0)
+    @problem1 = create(:problem, id: 1, user_id: 1)
+    @problem2 = create(:problem, id: 2, user_id: 1)
+    @attempt1 = create(:attempt, problem_id: 1, user_id: 2)
+    @attempt2 = create(:attempt, problem_id: 1, user_id: 2)
+    @attempt3 = create(:attempt, problem_id: 2, user_id: 2)
+    allow(controller).to receive(:current_user){ @student }#different tests are for diff roles
   end
 
   describe "GET #index" do
@@ -65,11 +66,12 @@ describe AttemptsController do
 
   describe 'GET #new' do
     #user
-    it "assigns a new Attempt to @attempt" do
-      #TODO: change problem_id
-      get :new, problem_id: @problem1.id
-      expect(assigns(:attempt)).to be_a_new(Attempt)
-    end
+    #I think that this is not necessary!! The controller does it, so this test passes. But it makes no sense.  The view doesn't use @attempt. We shouldn't call Attempt.new until the user clicks create!!
+    # it "assigns a new Attempt to @attempt" do
+    #   #TODO: change problem_id
+    #   get :new, problem_id: @problem1.id
+    #   expect(assigns(:attempt)).to be_a_new(Attempt)
+    # end
 
     it "renders the :new template" do
       #TODO: change problem_id
