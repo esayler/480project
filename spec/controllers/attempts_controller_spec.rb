@@ -4,16 +4,19 @@ describe AttemptsController do
     allow(controller).to receive(:authenticate_user!).and_return(true)
     @prof = create(:user, id: 1, role: 2)#might be 1 for prof, i forget. 2 is alum o/w
     @student = create(:user, id: 2, role: 0)
-    @problem1 = create(:problem, id: 1, user_id: 1)
-    @problem2 = create(:problem, id: 2, user_id: 1)
-    @attempt1 = create(:attempt, problem_id: 1, user_id: 2)
-    @attempt2 = create(:attempt, problem_id: 1, user_id: 2)
-    @attempt3 = create(:attempt, problem_id: 2, user_id: 2)
-    allow(controller).to receive(:current_user){ @student }#different tests are for diff roles
+    @problem1 = create(:problem, id: 1, user_id: @prof.id)
+    @attempt1 = create(:attempt, problem_id: @problem1.id, user_id: @student.id)
+    allow(controller).to receive(:current_user){ @student }#edit and update are for profs only
   end
 
   describe "GET #index" do
     #user
+    before :each do
+      @problem2 = create(:problem, id: 2, user_id: @prof.id)
+      @attempt2 = create(:attempt, problem_id: @problem1.id, user_id: @student.id)
+      @attempt3 = create(:attempt, problem_id: @problem2.id, user_id: @student.id)#shouldn't show up in problem1's index
+    end
+
     it "routes correctly" do
       get :index, problem_id: @problem1.id
       expect(response.status).to eq(200)
@@ -87,17 +90,19 @@ describe AttemptsController do
 
   describe 'GET #edit' do
     #user - author
+    before :each do
+      allow(controller).to receive(:current_user){ @prof }
+    end
+
     it "assigns the requested attempt to @attempt" do
-      attempt = create(:attempt)
       #TODO: change problem_id
-      get :edit, id: attempt, problem_id: @problem1.id
-      expect(assigns(:attempt)).to eq attempt
+      get :edit, id: @attempt1.id, problem_id: @attempt1.problem_id
+      expect(assigns(:attempt)).to eq @attempt1
     end
 
     it "renders the :edit template" do
-      attempt = create(:attempt)
       #TODO: change problem_id
-      get :edit, id: attempt, problem_id: @problem1.id
+      get :edit, id: @attempt1.id, problem_id: @attempt1.problem_id
       expect(response).to render_template :edit
     end
 
@@ -140,11 +145,13 @@ describe AttemptsController do
       end
 
       it "re-renders the :new template" do
+        #stub save
+        # allow(controller).to receive(:save).and_return(false)
+        # allow(Attempt).to receive(:save).and_return(false)
         post :create,
           problem_id: @problem1.id,
           attempt: attributes_for(:invalid_attempt)
         expect(response).to render_template :new
-        #expect(response).to have_content("Attempt failed to be submitted")
       end
 
     end
@@ -153,6 +160,9 @@ describe AttemptsController do
 
   describe 'PATCH #update' do
     #grade
+    before :each do
+      allow(controller).to receive(:current_user){ @prof }
+    end
 
     context "with valid attributes" do
 
@@ -164,7 +174,7 @@ describe AttemptsController do
 
       it "changes @attempt's attributes" do
         @attempt1.grade = 10
-        patch :update, problem_id: 1, id: @attempt1.id, attempt: @attempt1.attributes
+        patch :update, problem_id: @attempt1.problem_id, id: @attempt1.id, attempt: @attempt1.attributes
         expect(@attempt1.grade).to eq(10)
       end
 
