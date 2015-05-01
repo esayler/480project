@@ -22,16 +22,16 @@ class AttemptsController < ApplicationController
       params[:attempt][:submission] = "Attempt not completed"
     end
     a = Attempt.new()
-    byebug
+    # byebug
     a.submission = params[:attempt][:submission]
     a.user_id = current_user.id
-    a.grade = -1
+    # a.grade = -1
     
     @problem = Problem.find(params[:problem_id])
     @minute = @problem.time_limit
     a.problem_id = @problem.id
 
-    if a.save
+    if a.save(create_params)
       flash[:notice] = "Attempt submitted successfully!"
       redirect_to problem_attempts_path(@problem.id)
     else
@@ -73,7 +73,7 @@ class AttemptsController < ApplicationController
   end
 
   def update_params
-    params.require(:attempt).permit(:grade)
+    params.require(:attempt).permit(:grade, :user_id, :problem_id)
   end
 
 end
