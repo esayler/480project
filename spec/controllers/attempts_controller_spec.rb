@@ -66,12 +66,11 @@ describe AttemptsController do
 
   describe 'GET #new' do
     #user
-    #I think that this is not necessary!! The controller does it, so this test passes. But it makes no sense.  The view doesn't use @attempt. We shouldn't call Attempt.new until the user clicks create!!
-    # it "assigns a new Attempt to @attempt" do
-    #   #TODO: change problem_id
-    #   get :new, problem_id: @problem1.id
-    #   expect(assigns(:attempt)).to be_a_new(Attempt)
-    # end
+    it "Finds the problem, and assigns it to @problem" do
+      #TODO: change problem_id
+      get :new, problem_id: @problem1.id
+      expect(assigns(:problem)).to eq @problem1
+    end
 
     it "renders the :new template" do
       #TODO: change problem_id
