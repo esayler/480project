@@ -22,15 +22,16 @@ class AttemptsController < ApplicationController
       params[:attempt][:submission] = "Attempt not completed"
     end
     a = Attempt.new()
+    # byebug
     a.submission = params[:attempt][:submission]
     a.user_id = current_user.id
-    a.grade = -1
+    # a.grade = -1
     
     @problem = Problem.find(params[:problem_id])
     @minute = @problem.time_limit
     a.problem_id = @problem.id
 
-    if a.save
+    if a.save(create_params)
       flash[:notice] = "Attempt submitted successfully!"
       redirect_to problem_attempts_path(@problem.id)
     else
@@ -51,10 +52,10 @@ class AttemptsController < ApplicationController
 
     if @attempt.update(update_params)
       flash[:notice] = "The attempt was graded successfully."
-      redirect_to problem_attempts_path(@attempt.problem_id)
+      redirect_to problem_attempt_path(@attempt.problem_id, @attempt.id)
     else
       flash[:warning] = "The attempt was not graded successfully"
-      redirect_to problem_attempt_path(@attempt.problem_id, @attempt.id)
+      redirect_to edit_problem_attempt_path(@attempt.problem_id, @attempt.id)
     end
   end
 
@@ -62,7 +63,7 @@ class AttemptsController < ApplicationController
     attempt = Attempt.find(params[:id])
     authorize attempt
     attempt.destroy
-    redirect_to problems_path, :notice => "Attempt successfully deleted."
+    redirect_to problem_attempts_path(attempt.problem_id), :notice => "Attempt successfully deleted."
   end
 
   private
@@ -72,7 +73,7 @@ class AttemptsController < ApplicationController
   end
 
   def update_params
-    params.require(:attempt).permit(:grade)
+    params.require(:attempt).permit(:grade, :user_id, :problem_id)
   end
 
 end

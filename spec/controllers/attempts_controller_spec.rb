@@ -2,17 +2,21 @@ describe AttemptsController do
 
   before :each do
     allow(controller).to receive(:authenticate_user!).and_return(true)
-    @user = create(:user, id: 1)
-    @problem1 = create(:problem, id: 1)
-    @problem2 = create(:problem, id: 2)
-    @attempt1 = create(:attempt, problem_id: 1)
-    @attempt2 = create(:attempt, problem_id: 1)
-    @attempt3 = create(:attempt, problem_id: 2)
-    allow(controller).to receive(:current_user){ @user }
+    @prof = create(:user, id: 1, role: 2)#might be 1 for prof, i forget. 2 is alum o/w
+    @student = create(:user, id: 2, role: 0)
+    @problem1 = create(:problem, id: 1, user_id: @prof.id)
+    @attempt1 = create(:attempt, problem_id: @problem1.id, user_id: @student.id)
+    allow(controller).to receive(:current_user){ @student }#edit and update are for profs only
   end
 
   describe "GET #index" do
     #user
+    before :each do
+      @problem2 = create(:problem, id: 2, user_id: @prof.id)
+      @attempt2 = create(:attempt, problem_id: @problem1.id, user_id: @student.id)
+      @attempt3 = create(:attempt, problem_id: @problem2.id, user_id: @student.id)#shouldn't show up in problem1's index
+    end
+
     it "routes correctly" do
       get :index, problem_id: @problem1.id
       expect(response.status).to eq(200)
@@ -65,10 +69,10 @@ describe AttemptsController do
 
   describe 'GET #new' do
     #user
-    it "assigns a new Attempt to @attempt" do
+    it "Finds the problem, and assigns it to @problem" do
       #TODO: change problem_id
       get :new, problem_id: @problem1.id
-      expect(assigns(:attempt)).to be_a_new(Attempt)
+      expect(assigns(:problem)).to eq @problem1
     end
 
     it "renders the :new template" do
@@ -86,17 +90,19 @@ describe AttemptsController do
 
   describe 'GET #edit' do
     #user - author
+    before :each do
+      allow(controller).to receive(:current_user){ @prof }
+    end
+
     it "assigns the requested attempt to @attempt" do
-      attempt = create(:attempt)
       #TODO: change problem_id
-      get :edit, id: attempt, problem_id: @problem1.id
-      expect(assigns(:attempt)).to eq attempt
+      get :edit, id: @attempt1.id, problem_id: @attempt1.problem_id
+      expect(assigns(:attempt)).to eq @attempt1
     end
 
     it "renders the :edit template" do
-      attempt = create(:attempt)
       #TODO: change problem_id
-      get :edit, id: attempt, problem_id: @problem1.id
+      get :edit, id: @attempt1.id, problem_id: @attempt1.problem_id
       expect(response).to render_template :edit
     end
 
@@ -139,11 +145,15 @@ describe AttemptsController do
       end
 
       it "re-renders the :new template" do
+        #stub save
+        a = build(:attempt)
+        # allow(controller).to receive(:save).and_return(false)
+        allow(Attempt).to receive(:new).and_return(a)
+        expect(a).to receive(:save) {false}
         post :create,
           problem_id: @problem1.id,
           attempt: attributes_for(:invalid_attempt)
         expect(response).to render_template :new
-        #expect(response).to have_content("Attempt failed to be submitted")
       end
 
     end
@@ -152,6 +162,9 @@ describe AttemptsController do
 
   describe 'PATCH #update' do
     #grade
+    before :each do
+      allow(controller).to receive(:current_user){ @prof }
+    end
 
     context "with valid attributes" do
 
@@ -163,7 +176,7 @@ describe AttemptsController do
 
       it "changes @attempt's attributes" do
         @attempt1.grade = 10
-        patch :update, problem_id: 1, id: @attempt1.id, attempt: @attempt1.attributes
+        patch :update, problem_id: @attempt1.problem_id, id: @attempt1.id, attempt: @attempt1.attributes
         expect(@attempt1.grade).to eq(10)
       end
 
@@ -183,6 +196,7 @@ describe AttemptsController do
       end
 
       it "redirects to the grading page for the ungraded attempt" do
+        allow(Attempt).to receive(:update).and_return(false)
         @attempt1.grade = 11
         patch :update, problem_id: @attempt1.problem_id, id: @attempt1.id, attempt: @attempt1.attributes        
         expect(response).to redirect_to edit_problem_attempt_path(@attempt1.problem_id, @attempt1.id)
@@ -192,21 +206,23 @@ describe AttemptsController do
 
   end
 
-  describe 'DELETE #destroy', skip: "feature not implemented yet" do
+  describe 'DELETE #destroy' do#, skip: "feature not implemented yet" do
     # admin
     before :each do
-      @attempt5 = create(:attempt)
+      @student = create(:user, id: 3, role: 3)
+      allow(controller).to receive(:current_user){ @admin }
+      # @attempt5 = create(:attempt)
     end
 
     it 'deletes the attempt' do
       expect{
-        delete :destroy, id: @attempt5
+        delete :destroy, problem_id: @attempt1.problem_id, id: @attempt1.id
       }.to change(Attempt, :count).by(-1)
     end
 
     it "redirects to attempts#index" do
-      delete :destroy, id: @attempt5
-      expect(response).to redirect_to problem_attempts_path(@attempt5.problem_id)
+      delete :destroy, problem_id: @attempt1.problem_id, id: @attempt1.id
+      expect(response).to redirect_to problem_attempts_path(@attempt1.problem_id)
     end
 
   end
