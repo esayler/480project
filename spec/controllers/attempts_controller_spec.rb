@@ -146,8 +146,10 @@ describe AttemptsController do
 
       it "re-renders the :new template" do
         #stub save
+        a = build(:attempt)
         # allow(controller).to receive(:save).and_return(false)
-        # allow(Attempt).to receive(:save).and_return(false)
+        allow(Attempt).to receive(:new).and_return(a)
+        expect(a).to receive(:save) {false}
         post :create,
           problem_id: @problem1.id,
           attempt: attributes_for(:invalid_attempt)
@@ -194,7 +196,7 @@ describe AttemptsController do
       end
 
       it "redirects to the grading page for the ungraded attempt" do
-        # allow(Attempt).to receive(:update).and_return(false)
+        allow(Attempt).to receive(:update).and_return(false)
         @attempt1.grade = 11
         patch :update, problem_id: @attempt1.problem_id, id: @attempt1.id, attempt: @attempt1.attributes        
         expect(response).to redirect_to edit_problem_attempt_path(@attempt1.problem_id, @attempt1.id)
@@ -204,23 +206,23 @@ describe AttemptsController do
 
   end
 
-  describe 'DELETE #destroy', skip: "feature not implemented yet" do
+  describe 'DELETE #destroy' do#, skip: "feature not implemented yet" do
     # admin
     before :each do
-      @student = create(:user, id: 2, role: 3)
+      @student = create(:user, id: 3, role: 3)
       allow(controller).to receive(:current_user){ @admin }
       # @attempt5 = create(:attempt)
     end
 
     it 'deletes the attempt' do
       expect{
-        delete :destroy, id: @attempt5
+        delete :destroy, problem_id: @attempt1.problem_id, id: @attempt1.id
       }.to change(Attempt, :count).by(-1)
     end
 
     it "redirects to attempts#index" do
-      delete :destroy, id: @attempt5
-      expect(response).to redirect_to problem_attempts_path(@attempt5.problem_id)
+      delete :destroy, problem_id: @attempt1.problem_id, id: @attempt1.id
+      expect(response).to redirect_to problem_attempts_path(@attempt1.problem_id)
     end
 
   end

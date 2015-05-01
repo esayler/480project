@@ -63,7 +63,7 @@ class AttemptsController < ApplicationController
     attempt = Attempt.find(params[:id])
     authorize attempt
     attempt.destroy
-    redirect_to problems_path, :notice => "Attempt successfully deleted."
+    redirect_to problem_attempts_path(attempt.problem_id), :notice => "Attempt successfully deleted."
   end
 
   private
