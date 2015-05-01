@@ -3,5 +3,6 @@
     = f.input :language, collection: [:python, :java, :ruby, :clang, :haskell], prompt: "Choose a language"
     = f.input :difficulty, collection: 1..5, required: true, prompt: "Choose a difficulty"
     = f.input :description, as: :text, hint: 'Enter a short one sentence description', input_html: { maxlength: 140 }, required: true
+    = f.input :time_limit, as: :integer, hint: 'Enter a time limit in minutes', required: true
     = f.button :submit
 
