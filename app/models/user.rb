@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
       user.email = auth.info.email
       user.name = auth.info.name # assuming the user model has a name
       user.password = Devise.friendly_token[0,20]
+      user.role = :admin
     end
 
   end
