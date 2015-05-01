@@ -4,16 +4,22 @@ describe ProblemsController do
 
     #let (:user) { FactoryGirl.create :user, :student }
 
-    @user = create(:user, id: 1)
-    @attempt1 = create(:attempt, problem_id: 1)
-    @attempt2 = create(:attempt, problem_id: 1)
-    @problem1 = create(:problem, id: 1)
-    @problem2 = create(:problem, id: 2)
+    @prof = create(:user, id: 1, role: 2)
+    # @attempt1 = create(:attempt, problem_id: 1)
+    # @attempt2 = create(:attempt, problem_id: 1)
+    @problem1 = create(:problem, id: 1, user_id: @prof.id)
+    @problem2 = create(:problem, id: 2, user_id: @prof.id)
     allow(controller).to receive(:authenticate_user!).and_return(true)
-    allow(controller).to receive(:current_user){ @user }
+    allow(controller).to receive(:current_user){ @prof }
   end
 
   describe "GET #index" do
+    #student
+    before :each do
+      @student = create(:user, id: 2, role: 0)
+      allow(controller).to receive(:current_user){ @student }
+    end
+
     it "routes correctly" do
       get :index
       expect(response.status).to eq(200)
@@ -28,20 +34,20 @@ describe ProblemsController do
 
   describe "GET #show" do
     it "routes correctly" do
-      get :show, id: 1
+      get :show, id: @problem1
       #expect(Problem).to receive(:find).with("1") { @problem1 }
       expect(response.status).to eq(200)
     end
 
     it "renders the show template" do
-      get :show, id: 1
+      get :show, id: @problem1
       #expect(Problem).to receive(:find).with("1") { @problem1 }
       expect(response).to render_template(:show)
     end
   end
 
   describe 'GET #new' do
-    #user
+    #non-student
     it "assigns a new problem to @problem" do
       #TODO: change problem_id
       get :new
@@ -52,23 +58,6 @@ describe ProblemsController do
       #TODO: change problem_id
       get :new
       expect(response).to render_template :new
-    end
-
-  end
-
-  describe 'GET #edit' do
-    #user - creator
-    #TODO: clean up
-    it "assigns the requested problem to @problem" do
-      problem = create(:problem)
-      get :edit, id: problem
-      expect(assigns(:problem)).to eq problem
-    end
-
-    it "renders the :edit template" do
-      problem = create(:problem)
-      get :edit, id: problem
-      expect(response).to render_template :edit
     end
 
   end
@@ -106,5 +95,22 @@ describe ProblemsController do
 
     end
 
- end
+  end
+
+  describe 'GET #edit' do
+    #user - creator
+    #TODO: clean up
+    it "assigns the requested problem to @problem" do
+      problem = create(:problem)
+      get :edit, id: problem
+      expect(assigns(:problem)).to eq problem
+    end
+
+    it "renders the :edit template" do
+      problem = create(:problem)
+      get :edit, id: problem
+      expect(response).to render_template :edit
+    end
+
+  end
 end

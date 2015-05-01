@@ -194,7 +194,7 @@ describe AttemptsController do
       end
 
       it "redirects to the grading page for the ungraded attempt" do
-        allow(Attempt).to receive(:update).and_return(false)
+        # allow(Attempt).to receive(:update).and_return(false)
         @attempt1.grade = 11
         patch :update, problem_id: @attempt1.problem_id, id: @attempt1.id, attempt: @attempt1.attributes        
         expect(response).to redirect_to edit_problem_attempt_path(@attempt1.problem_id, @attempt1.id)
@@ -207,7 +207,9 @@ describe AttemptsController do
   describe 'DELETE #destroy', skip: "feature not implemented yet" do
     # admin
     before :each do
-      @attempt5 = create(:attempt)
+      @student = create(:user, id: 2, role: 3)
+      allow(controller).to receive(:current_user){ @admin }
+      # @attempt5 = create(:attempt)
     end
 
     it 'deletes the attempt' do

@@ -52,10 +52,10 @@ class AttemptsController < ApplicationController
 
     if @attempt.update(update_params)
       flash[:notice] = "The attempt was graded successfully."
-      redirect_to problem_attempts_path(@attempt.problem_id)
+      redirect_to problem_attempt_path(@attempt.problem_id, @attempt.id)
     else
       flash[:warning] = "The attempt was not graded successfully"
-      redirect_to problem_attempt_path(@attempt.problem_id, @attempt.id)
+      redirect_to edit_problem_attempt_path(@attempt.problem_id, @attempt.id)
     end
   end
 
