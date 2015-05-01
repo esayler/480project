@@ -88,32 +88,6 @@ describe AttemptsController do
 
   end
 
-  describe 'GET #edit' do
-    #user - author
-    before :each do
-      allow(controller).to receive(:current_user){ @prof }
-    end
-
-    it "assigns the requested attempt to @attempt" do
-      #TODO: change problem_id
-      get :edit, id: @attempt1.id, problem_id: @attempt1.problem_id
-      expect(assigns(:attempt)).to eq @attempt1
-    end
-
-    it "renders the :edit template" do
-      #TODO: change problem_id
-      get :edit, id: @attempt1.id, problem_id: @attempt1.problem_id
-      expect(response).to render_template :edit
-    end
-
-    #it "fails to render the :edit template when a bad problem id is requested" do
-      #attempt = create(:attempt)
-      #get :edit, id: attempt, problem_id: 0
-      #expect(response).to redirect_to problems_path
-    #end
-
-  end
-
   describe "POST #create" do
     #user
     context "with valid attributes" do
@@ -160,6 +134,32 @@ describe AttemptsController do
 
   end
 
+  describe 'GET #edit' do
+    #user - author
+    before :each do
+      allow(controller).to receive(:current_user){ @prof }
+    end
+
+    it "assigns the requested attempt to @attempt" do
+      #TODO: change problem_id
+      get :edit, id: @attempt1.id, problem_id: @attempt1.problem_id
+      expect(assigns(:attempt)).to eq @attempt1
+    end
+
+    it "renders the :edit template" do
+      #TODO: change problem_id
+      get :edit, id: @attempt1.id, problem_id: @attempt1.problem_id
+      expect(response).to render_template :edit
+    end
+
+    #it "fails to render the :edit template when a bad problem id is requested" do
+      #attempt = create(:attempt)
+      #get :edit, id: attempt, problem_id: 0
+      #expect(response).to redirect_to problems_path
+    #end
+
+  end
+
   describe 'PATCH #update' do
     #grade
     before :each do
@@ -192,6 +192,7 @@ describe AttemptsController do
       it "doesn't change @attempt's grade" do
         @attempt1.grade = 11
         patch :update, problem_id: @attempt1.problem_id, id: @attempt1.id, attempt: @attempt1.attributes        
+        @attempt1.reload
         expect(@attempt1.grade).to eq(-1)
       end
 
