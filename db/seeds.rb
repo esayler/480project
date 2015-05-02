@@ -14,7 +14,7 @@
                  description: Faker::Hacker.say_something_smart,
                  difficulty: 1,
                  user_id: 1,
-                 time_limit: 1})
+                 time_limit: 60})
 end
 
 
