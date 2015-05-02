@@ -22,7 +22,7 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'pundit'
 gem 'simple_form'
-#gem 'therubyracer', :platform=>:ruby
+gem 'therubyracer', :platform=>:ruby
 gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 gem 'will_paginate', '~> 3.0.6'
 gem 'will_paginate-bootstrap'
