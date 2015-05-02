@@ -27,21 +27,23 @@ feature 'Edit profile', :devise do
     expect(page).to have_content('Edit My Profile')
     click_on 'Edit My Profile'
     expect(page).to have_content('Edit User')
-    expect(page).to have_css("button,right")
+    expect(page).to have_css('button,right')
   end
 
   # Scenario: User can update personal info when logged in
   #   Given I am logged in
   #   So that I can update my personal info
   #   I want my new info to be persisted in the db when I press update on the edit user page
-  scenario "changes to user profile are persisted in the db", :skip => "add db persistence expectation" do
+  scenario "user can successfully update user profile with valid attributes" do
     login
-    # expect(page).to have_content('Edit account')
-    click_on 'Edit account'
-    # expect(page).to have_content('Edit User')
-    # expect(page).to have_button('Update User')
-    click_on "Update"
-    expect(page).to have_content("Your account has been updated successfully.")
+    expect(page).to have_content('Edit My Profile')
+    click_on 'Edit My Profile'
+    expect(page).to have_content('Edit User')
+    expect(page).to have_button('Update')
+    fill_in 'Name', :with => Faker::Name.name
+    fill_in 'Email', :with => Faker::Internet.safe_email
+    click_on 'Update'
+    expect(page).to have_content('Your account has been updated successfully.')
   end
 
 end
