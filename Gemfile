@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.0'
-gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
@@ -10,9 +9,11 @@ gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'bootstrap-sass', '~> 3.3.4'
+gem 'sass-rails', '>= 3.2'
+
 #gem 'capistrano-rails', group: :development
 gem 'jquery-countdown-rails'
-gem 'bootstrap-sass'
 gem 'figaro', '>= 1.0.0.rc1'
 gem 'haml-rails'
 gem 'high_voltage'
@@ -21,7 +22,7 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'pundit'
 gem 'simple_form'
-gem 'therubyracer', :platform=>:ruby
+#gem 'therubyracer', :platform=>:ruby
 gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 gem 'will_paginate', '~> 3.0.6'
 gem 'will_paginate-bootstrap'
