@@ -17,8 +17,13 @@ crumb :problem do |problem|
 end
 
 crumb :edit_problem do |problem|
-  link "Edit #{problem.name}", edit_problem_path(problem)
+  link "Edit '#{problem.name}'", edit_problem_path(problem)
   parent :problem, problem
+end
+
+crumb :new_problem do
+  link "New Problem", new_problem_path
+  parent :problems
 end
 
 crumb :new_attempt do |problem|
