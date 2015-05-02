@@ -82,6 +82,12 @@ describe ProblemsController do
 
     context "with invalid attributes" do
 
+      before :each do
+        # p = build(:problem, id: 3, user_id: @prof.id)
+        allow(Problem).to receive(:create).and_return(false)
+        # allow(p).to receive(:save).and_return(false)
+      end
+
       it "does not save the new problem in the database" do
         expect{
           post :create, problem: attributes_for(:invalid_attempt)
@@ -89,6 +95,8 @@ describe ProblemsController do
       end
 
       it "re-renders the :new template" do
+        # require 'byebug'
+        # byebug
         post :create, problem: attributes_for(:invalid_problem)
         expect(response).to redirect_to new_problem_path
       end
@@ -101,15 +109,91 @@ describe ProblemsController do
     #user - creator
     #TODO: clean up
     it "assigns the requested problem to @problem" do
-      problem = create(:problem)
-      get :edit, id: problem
-      expect(assigns(:problem)).to eq problem
+      # problem = create(:problem)
+      get :edit, id: @problem1.id
+      expect(assigns(:problem)).to eq @problem1
     end
 
     it "renders the :edit template" do
-      problem = create(:problem)
-      get :edit, id: problem
+      # problem = create(:problem)
+      get :edit, id: @problem1.id
       expect(response).to render_template :edit
+    end
+
+  end
+
+  describe 'PATCH #update' do
+    #update
+    # before :each do
+    #   allow(controller).to receive(:current_user){ @prof }
+    # end
+
+    context "with valid attributes" do
+
+      it "locates the requested problem" do
+        @problem1.name = @problem1.name.reverse
+        patch :update, id: @problem1.id, problem: @problem1.attributes
+        expect(assigns(:problem)).to eq(@problem1)
+      end
+
+      it "changes @problem's attributes" do
+        @problem1.description = @problem1.description.reverse
+        # @problem1.difficulty = (@problem1.difficulty) % 5 + 1
+        patch :update, id: @problem1.id, problem: @problem1.attributes
+        p = @problem1.reload
+        expect(p).to eq(@problem1)
+      end
+
+      it "redirects to show the updated attempt" do
+        @problem1.time_limit = @problem1.time_limit * 2
+        patch :update, id: @problem1.id, problem: @problem1.attributes
+        expect(response).to redirect_to problem_path(@problem1.id)
+      end
+
+    end
+
+    context "with invalid attributes" do
+
+      it "doesn't change @problem's difficulty if out of range" do
+        @problem1.difficulty = 7.5
+        patch :update, id: @problem1.id, problem: @problem1.attributes        
+        @problem1.reload
+        expect(@problem1.difficulty).not_to eq(7.5)
+      end
+
+      it "doesn't change @problem's time limit if negative" do
+        @problem1.time_limit = -1
+        patch :update, id: @problem1.id, problem: @problem1.attributes        
+        @problem1.reload
+        expect(@problem1.time_limit).not_to eq(-1)
+      end
+
+      it "redirects to the edit page" do
+        allow(@problem1).to receive(:update_attributes).and_return(false)
+        patch :update, id: @problem1.id, problem: @problem1.attributes      
+        expect(response).to redirect_to edit_problem_attempt_path(@problem1.id)
+      end
+
+    end
+
+  end
+
+  describe 'DELETE #destroy' do#, skip: "feature not implemented yet" do
+    # admin
+    before :each do
+      @admin = create(:user, id: 3, role: 3)
+      allow(controller).to receive(:current_user){ @admin }
+    end
+
+    it 'deletes the problem' do
+      expect{
+        delete :destroy, id: @problem1.id
+      }.to change(Problem, :count).by(-1)
+    end
+
+    it "redirects to problems#index" do
+      delete :destroy, id: @problem1.id
+      expect(response).to redirect_to problems_path
     end
 
   end
