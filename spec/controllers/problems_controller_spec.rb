@@ -1,12 +1,7 @@
 describe ProblemsController do
 
   before :each do
-
-    #let (:user) { FactoryGirl.create :user, :student }
-
     @prof = create(:user, id: 1, role: 2)
-    # @attempt1 = create(:attempt, problem_id: 1)
-    # @attempt2 = create(:attempt, problem_id: 1)
     @problem1 = create(:problem, id: 1, user_id: @prof.id)
     @problem2 = create(:problem, id: 2, user_id: @prof.id)
     allow(controller).to receive(:authenticate_user!).and_return(true)
@@ -73,7 +68,6 @@ describe ProblemsController do
       end
 
       it "should redirect to index on sucess" do
-        #post :create, attempt: attributes_for(:attempt)
         post :create, problem: attributes_for(:problem)
         expect(response).to redirect_to problems_path
       end
@@ -95,8 +89,6 @@ describe ProblemsController do
       end
 
       it "re-renders the :new template" do
-        # require 'byebug'
-        # byebug
         post :create, problem: attributes_for(:invalid_problem)
         expect(response).to redirect_to new_problem_path
       end
@@ -109,13 +101,11 @@ describe ProblemsController do
     #user - creator
     #TODO: clean up
     it "assigns the requested problem to @problem" do
-      # problem = create(:problem)
       get :edit, id: @problem1.id
       expect(assigns(:problem)).to eq @problem1
     end
 
     it "renders the :edit template" do
-      # problem = create(:problem)
       get :edit, id: @problem1.id
       expect(response).to render_template :edit
     end
@@ -124,9 +114,6 @@ describe ProblemsController do
 
   describe 'PATCH #update' do
     #update
-    # before :each do
-    #   allow(controller).to receive(:current_user){ @prof }
-    # end
 
     context "with valid attributes" do
 
