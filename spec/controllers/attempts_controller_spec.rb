@@ -2,7 +2,7 @@ describe AttemptsController do
 
   before :each do
     allow(controller).to receive(:authenticate_user!).and_return(true)
-    @prof = create(:user, id: 1, role: 2)#might be 1 for prof, i forget. 2 is alum o/w
+    @prof = create(:user, id: 1, role: 2)
     @student = create(:user, id: 2, role: 0)
     @problem1 = create(:problem, id: 1, user_id: @prof.id)
     @attempt1 = create(:attempt, problem_id: @problem1.id, user_id: @student.id)
@@ -111,22 +111,22 @@ describe AttemptsController do
     context "with invalid attributes" do
 
       it "does not save the new attempt in the database" do
+        a = build(:attempt, id: 2, problem_id: @problem1.id, user_id: @student.id)
+        allow(Attempt).to receive(:new).and_return(a)
+        allow(a).to receive(:save).and_return(false)
         expect{
           post :create,
-          problem_id: @problem1.id,
-          attempt: attributes_for(:invalid_attempt)
+          problem_id: a.problem_id,
+          attempt: a.attributes
         }.not_to change(Attempt, :count)
       end
 
       it "re-renders the :new template" do
         #stub save
-        a = build(:attempt)
-        # allow(controller).to receive(:save).and_return(false)
+        a = build(:attempt, id: 2, problem_id: @problem1.id, user_id: @student.id)
         allow(Attempt).to receive(:new).and_return(a)
-        expect(a).to receive(:save) {false}
-        post :create,
-          problem_id: @problem1.id,
-          attempt: attributes_for(:invalid_attempt)
+        allow(a).to receive(:save).and_return(false)
+        post :create, problem_id: a.problem_id, attempt: a.attributes
         expect(response).to render_template :new
       end
 
