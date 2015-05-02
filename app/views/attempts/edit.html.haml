@@ -1,7 +1,8 @@
 .container
+  - breadcrumb :grade_attempt, @attempt
   .page-header
     %h2= "Grade user attempt"
-    %p.lead= "User #{@attempt.user_id}'s attempt for problem '#{@problem.name}'"
+    %p.lead= "#{@attempt.user.name}'s attempt for problem '#{@problem.name}'"
   %p
     Problem: #{@problem.name if @problem}
     %br
@@ -18,5 +19,3 @@
       =f.number_field :grade, :required => true, in: 0..10
       %br
       =f.submit "Update Grade"
-
-    %p= link_to "Back to the attempt", problem_attempt_path(@attempt.problem_id, @attempt.id)
