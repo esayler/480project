@@ -18,13 +18,12 @@
 @charset "UTF-8";
 
 body {
-    background: url(../images/Colgate_Hill_Panorama_2.jpg) no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    /*background: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../images/Colgate_Hill_Panorama_2.jpg) no-repeat center center fixed;*/
+    /*backround: no-repeat center center fixed;*/
+    background-image: url(../images/bright_squares/bright_squares.png);
+    /*background-size: cover;*/
 }
 .logo {
 	opacity:40%;
 }
-$body-bg: transparent;
+/*$body-bg: transparent;*/
