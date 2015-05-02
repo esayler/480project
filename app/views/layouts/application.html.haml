@@ -13,6 +13,6 @@
     %header
       = render 'layouts/navigation'
     %main{:role => "main"}
-      = render 'layouts/messages'
       = breadcrumbs style: :bootstrap
+      = render 'layouts/messages'
       = yield
