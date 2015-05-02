@@ -4,7 +4,7 @@ describe UsersController do
 
     #let (:user) { FactoryGirl.create :user, :student }
 
-    @user = create(:user, id: 1, role: 2)
+    @user = User.create!(email:"test@email.com",name:"test", password:"tomandjerry", id:1,role:3)
     # @attempt1 = create(:attempt, problem_id: 1)
     # @attempt2 = create(:attempt, problem_id: 1)
     allow(controller).to receive(:authenticate_user!).and_return(true)
@@ -39,4 +39,12 @@ describe UsersController do
     end
   end
 
+  describe "PUT #update" do
+    it "succeed to update" do
+      User.should_receive(:find).and_return(@user)
+      #@user.should_receive(:update).and_return(true)
+      put :update, :id => 1, :user => {:name => "test", :email => "test@test"}
+      response.should redirect_to(users_path)
+    end
+  end
 end
