@@ -2,6 +2,11 @@ crumb :root do
   link "Home", root_path
 end
 
+crumb :about do
+  link "About", page_path('about')
+  parent :root
+end
+
 crumb :problems do
   link "Problems", problems_path
 end
