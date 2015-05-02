@@ -37,7 +37,7 @@ class ProblemsController < ApplicationController
     @problem = Problem.find(params[:id])
     authorize @problem
     if @problem.update_attributes(secure_params)
-      redirect_to problems_path, :notice => "Problem \"#{@problem.name}\" was successfully updated!"
+      redirect_to problem_path(@problem.id), :notice => "Problem \"#{@problem.name}\" was successfully updated!"
     else
       redirect_to problems_path, :alert => "Unable to update problem \"#{@problem.name}\" account for #{@user.name}."
     end

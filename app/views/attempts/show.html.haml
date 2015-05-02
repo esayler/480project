@@ -3,7 +3,8 @@
   .page-header
     %h2 Attempt
   %p
-    Name: #{@attempt.user.name}
+    Name: 
+    = link_to @attempt.user.name, user_path(@attempt.user_id)
     %br
     Problem: #{@attempt.problem.name}
     %br
@@ -11,8 +12,5 @@
     %br
     Grade:
     = @attempt.show_grade
-    - if @attempt.grade == -1
-      - if policy(@attempt).edit?
-        %td= button_to 'Grade attempt', edit_problem_attempt_path(@attempt.problem_id, @attempt.id), method: :get, class: 'btn btn-xs btn-primary'
-      
-  %p= link_to "Back to all attempts", problem_attempts_path(@attempt.problem_id)
+    - if @attempt.grade == -1 and policy(@attempt).edit?
+      %td= button_to 'Grade attempt', edit_problem_attempt_path(@attempt.problem_id, @attempt.id), method: :get, class: 'btn btn-xs btn-primary'

@@ -1,10 +1,4 @@
 describe UsersController do
-  #before do
-    #request.env["devise.mapping"] = Devise.mappings[:user] # If using Devise
-    #request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2] 
-  #end
-  #let(:student) { create(:user, :student) }
-  #let(:admin) { create(:user, :admin) }
 
   before :each do
     allow(controller).to receive(:authenticate_user!).and_return(true)
@@ -84,21 +78,7 @@ describe UsersController do
       end
     end
 
-    xcontext "with invalid attributes" do
-
-      #it "doesn't change @user info" do
-        #patch :update, id: @student.id
-        #@student.reload
-        ##expect(@student.grade).to eq(-1)
-      #end
-
-      #it "redirects to the grading page for the ungraded attempt" do
-        #allow(Attempt).to receive(:update).and_return(false)
-        #@attempt1.grade = 11
-        #patch :update, problem_id: @attempt1.problem_id, id: @attempt1.id, attempt: @attempt1.attributes        
-        #expect(response).to redirect_to edit_problem_attempt_path(@attempt1.problem_id, @attempt1.id)
-      #end
-
+    context "with invalid attributes", :skip => :true do
     end
 
   end

@@ -24,11 +24,11 @@ class AttemptPolicy
   end
 
   def edit?
-    @current_user.admin? or @current_user.alum? or @current_user.prof? or @current_user.id != @attempt.user_id
+    @current_user.admin? or @current_user.id == @attempt.problem.user_id
   end
 
   def update?
-    @current_user.admin? or @current_user.alum? or @current_user.prof? or @current_user.id != @attempt.user_id
+    @current_user.admin? or @current_user.id == @attempt.problem.user_id
   end
 
   def destroy?

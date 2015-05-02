@@ -21,6 +21,11 @@ crumb :new_attempt do |problem|
   parent :problem, problem
 end
 
+crumb :grade_attempt do |attempt|
+  link "Grade Attempt", edit_problem_attempt_path(attempt.problem_id, attempt.id)
+  parent :attempt, attempt
+end
+
 crumb :attempts do |problem|
   link "Attempts", problem_attempts_path(problem.id)
   parent :problem, problem

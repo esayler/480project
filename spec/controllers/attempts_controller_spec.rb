@@ -177,6 +177,7 @@ describe AttemptsController do
       it "changes @attempt's attributes" do
         @attempt1.grade = 10
         patch :update, problem_id: @attempt1.problem_id, id: @attempt1.id, attempt: @attempt1.attributes
+        @attempt1.reload
         expect(@attempt1.grade).to eq(10)
       end
 
@@ -210,9 +211,8 @@ describe AttemptsController do
   describe 'DELETE #destroy' do#, skip: "feature not implemented yet" do
     # admin
     before :each do
-      @student = create(:user, id: 3, role: 3)
+      @admin = create(:user, id: 3, role: 3)
       allow(controller).to receive(:current_user){ @admin }
-      # @attempt5 = create(:attempt)
     end
 
     it 'deletes the attempt' do
