@@ -23,8 +23,8 @@
 
     .col-lg-8
       - if policy(@problem).edit?
-        %p= button_to 'Edit', edit_problem_path(@problem.id), method: :get, class: 'btn btn-xs btn-primary'
-        %p= button_to 'Attempts', problem_attempts_path(@problem.id), method: :get, class: 'btn btn-xs btn-default'
+        %p= button_to 'Edit', edit_problem_path(@problem.id), method: :get, class: 'btn btn-md btn-default'
+        %p= button_to 'Attempts', problem_attempts_path(@problem.id), method: :get, class: 'btn btn-md btn-default'
 
-      - if current_user.student?
-        %p= link_to "Submit an Attempt", new_problem_attempt_path(@problem.id)
+      - if current_user.student? or current_user.admin?
+        %p= button_to "New Attempt", new_problem_attempt_path(@problem.id), method: :get, class: 'btn btn-md btn-primary'
