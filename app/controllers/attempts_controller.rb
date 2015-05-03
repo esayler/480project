@@ -9,6 +9,7 @@ class AttemptsController < ApplicationController
 
   def show
     @attempt = Attempt.find(params[:id])
+    @problem = @attempt.problem
     authorize @attempt
   end
 

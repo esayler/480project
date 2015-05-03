@@ -1,0 +1,15 @@
+.row
+  %h2
+    Attempt
+
+.row
+  %h3
+    Name:
+    %small= link_to @attempt.user.name, user_path(@attempt.user_id)
+
+.row
+  %h3
+    Submission:
+    %small syntax highlighting: python
+    = raw CodeRay.scan(@attempt.submission, :python).div
+

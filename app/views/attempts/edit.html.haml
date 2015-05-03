@@ -1,21 +1,13 @@
-.container
-  - breadcrumb :grade_attempt, @attempt
-  .page-header
-    %h2= "Grade user attempt"
-    %p.lead= "#{@attempt.user.name}'s attempt for problem '#{@problem.name}'"
-  %p
-    Problem: #{@problem.name if @problem}
+- breadcrumb :grade_attempt, @attempt
+
+= render partial: 'layouts/problem'
+= render partial: 'attempt'
+
+.row
+  %h2= "Select a Grade for this attempt:"
+  =form_for [@problem, @attempt] do |f|
     %br
-    Difficulty: #{@problem.difficulty if @problem}
+    =f.label :grade
+    =f.number_field :grade, :required => true, in: 0..10
     %br
-    Description: #{@problem.description if @problem}
-    %br= "Language: " + @problem.language if @problem.language
-  %p
-    Submission: #{@attempt.submission if @attempt}
-  %p  
-    =form_for [@problem, @attempt] do |f|
-      %br
-      =f.label :grade
-      =f.number_field :grade, :required => true, in: 0..10
-      %br
-      =f.submit "Update Grade"
+    =f.submit "Update Grade"

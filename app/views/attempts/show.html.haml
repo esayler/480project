@@ -1,18 +1,8 @@
 - breadcrumb :attempt, @attempt
-.page-header
-  %h2
-    Attempt
-    %small= @attempt.problem.name
 
-.row
-  %h3
-    Name:
-    %small= link_to @attempt.user.name, user_path(@attempt.user_id)
-.row
-  %h3
-    Submission:
-    %small syntax highlighting: python
-    = raw CodeRay.scan(@attempt.submission, :python).div
+= render partial: 'layouts/problem'
+= render partial: 'attempt'
+
 .row
   %h3
     Grade:

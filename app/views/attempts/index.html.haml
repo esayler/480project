@@ -1,47 +1,46 @@
-.container
-  - breadcrumb :attempts, @problem
-  .row
-    .page-header
-      %h2
-        Attempts
-        %small=@problem.name
+- breadcrumb :attempts, @problem
+.row
+  .page-header
+    %h2
+      Attempts
+      %small=@problem.name
 
-    - if @attempts.empty?
-      %h4 No attempts yet!
-    - else
-      %div.table-responsive
-        %table.table.table-hover
-          %thead
+  - if @attempts.empty?
+    %h4 No attempts yet!
+  - else
+    %div.table-responsive
+      %table.table.table-hover
+        %thead
+          %tr
+            %th Author
+            %th Attempt
+            %th Grade
+        %tbody
+          - @attempts.each do |attempt|
             %tr
-              %th Author
-              %th Attempt
-              %th Grade
-          %tbody
-            - @attempts.each do |attempt|
-              %tr
-                %td= link_to attempt.user.name, user_path(attempt.user_id)
-                %td= link_to attempt.submission.slice(0,20) + "...",
-                  problem_attempt_path(attempt.problem_id, attempt.id)
+              %td= link_to attempt.user.name, user_path(attempt.user_id)
+              %td= link_to attempt.submission.slice(0,20) + "...",
+                problem_attempt_path(attempt.problem_id, attempt.id)
 
-                - if attempt.grade == -1
-                  - if policy(attempt).edit?
-                    %td= button_to 'Grade',
-                      edit_problem_attempt_path(attempt.problem_id, attempt.id),
-                      method: :get,
-                      class: 'btn btn-xs btn-primary'
-                  - else
-                    %td= attempt.show_grade
+              - if attempt.grade == -1
+                - if policy(attempt).edit?
+                  %td= button_to 'Grade',
+                    edit_problem_attempt_path(attempt.problem_id, attempt.id),
+                    method: :get,
+                    class: 'btn btn-xs btn-primary'
                 - else
                   %td= attempt.show_grade
+              - else
+                %td= attempt.show_grade
 
-                - if policy(attempt).destroy?
-                  %td= button_to 'Delete',
-                    problem_attempt_path(attempt.problem_id, attempt.id),
-                    method: :delete,
-                    title: "Delete  #{attempt.user.name}'s attempt for #{attempt.problem.name}",
-                    data: { confirm: 'Are you sure you want to delete this attempt?',
-                            commit: 'Delete',
-                            cancel: 'Cancel' },
-                    class: 'btn btn-xs btn-danger'
+              - if policy(attempt).destroy?
+                %td= button_to 'Delete',
+                  problem_attempt_path(attempt.problem_id, attempt.id),
+                  method: :delete,
+                  title: "Delete  #{attempt.user.name}'s attempt for #{attempt.problem.name}",
+                  data: { confirm: 'Are you sure you want to delete this attempt?',
+                          commit: 'Delete',
+                          cancel: 'Cancel' },
+                  class: 'btn btn-xs btn-danger'
 
 
