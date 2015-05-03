@@ -1,16 +1,23 @@
-.container
-  - breadcrumb :attempt, @attempt
-  .page-header
-    %h2 Attempt
-  %p
-    Name: 
-    = link_to @attempt.user.name, user_path(@attempt.user_id)
-    %br
-    Problem: #{@attempt.problem.name}
-    %br
-    Submission: #{@attempt.submission if @attempt}
-    %br
+- breadcrumb :attempt, @attempt
+.page-header
+  %h2
+    Attempt
+    %small= @attempt.problem.name
+
+.row
+  %h3
+    Name:
+    %small= link_to @attempt.user.name, user_path(@attempt.user_id)
+.row
+  %h3
+    Submission:
+    %small syntax highlighting: python
+    = raw CodeRay.scan(@attempt.submission, :python).div
+.row
+  %h3
     Grade:
-    = @attempt.show_grade
-    - if @attempt.grade == -1 and policy(@attempt).edit?
-      %td= button_to 'Grade attempt', edit_problem_attempt_path(@attempt.problem_id, @attempt.id), method: :get, class: 'btn btn-xs btn-primary'
+    %small
+      = @attempt.show_grade
+      - if @attempt.grade == -1 and policy(@attempt).edit?
+        %td
+          = button_to 'Grade attempt', edit_problem_attempt_path(@attempt.problem_id, @attempt.id), method: :get, class: 'btn btn-xs btn-primary'

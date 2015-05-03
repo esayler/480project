@@ -5,6 +5,12 @@ GIT
     data-confirm-modal (1.0.2)
       railties (>= 3.0)
 
+GIT
+  remote: git://github.com/vmg/redcarpet.git
+  revision: 896f7287f463840a3ca991739f6b9aebc9144d7f
+  specs:
+    redcarpet (3.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -387,6 +393,7 @@ DEPENDENCIES
   byebug
   capybara
   codeclimate-test-reporter
+  coderay
   coffee-rails (~> 4.1.0)
   data-confirm-modal!
   database_cleaner
@@ -421,6 +428,7 @@ DEPENDENCIES
   rb-fchange
   rb-fsevent
   rb-inotify
+  redcarpet!
   rspec-rails
   rubocop
   sass-rails (>= 3.2)

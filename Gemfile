@@ -27,6 +27,8 @@ gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 gem 'will_paginate', '~> 3.0.6'
 gem 'will_paginate-bootstrap'
 gem 'gretel'
+gem 'redcarpet', github: 'vmg/redcarpet'
+gem 'coderay'
 
 group :development do
   gem 'better_errors'
