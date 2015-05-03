@@ -1,4 +1,5 @@
 require 'redcarpet'
+require 'rdiscount'
 
 module ApplicationHelper
   #def markdown(text)
