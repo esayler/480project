@@ -42,6 +42,6 @@ module ApplicationHelper
     }
     markdown_to_html = Redcarpet::Markdown.new(coderayified, options)
     puts 'DEBUG - text class:' + text.class.to_s
-    markdown_to_html.render(text).html_safe
+    markdown_to_html.render(text.to_s).html_safe
   end
 end
