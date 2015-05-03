@@ -4,4 +4,6 @@ require File.expand_path('../application', __FILE__)
 # Initialize the Rails application.
 Rails.application.initialize!
 
-ActsAsMarkup.markdown_library = :redcarpet
+Rails.application.config.after_initialize do
+  ActsAsMarkup.markdown_library = :redcarpet
+end
