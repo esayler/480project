@@ -434,6 +434,7 @@ DEPENDENCIES
   rb-fchange
   rb-fsevent
   rb-inotify
+  rdiscount
   redcarpet!
   rspec-rails
   rubocop

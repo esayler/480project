@@ -30,6 +30,7 @@ gem 'gretel'
 gem 'redcarpet', github: 'vmg/redcarpet'
 gem 'coderay'
 gem 'acts_as_markup'
+gem 'rdiscount'
 
 group :development do
   gem 'better_errors'
