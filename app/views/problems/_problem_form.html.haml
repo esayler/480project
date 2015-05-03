@@ -18,6 +18,10 @@
     placeholder: 'Enter a short one sentence description',
     input_html: { maxlength: 140 }
 
+  = f.input :body,
+    as: :text,
+    placeholder: 'Markdown supported'
+
   = f.input :time_limit,
     as: :integer,
     placeholder: 'Enter a time limit in minutes'

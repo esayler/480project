@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150428002947) do
+ActiveRecord::Schema.define(version: 20150503054129) do
 
   create_table "attempts", force: :cascade do |t|
     t.integer  "user_id"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 20150428002947) do
     t.datetime "updated_at",  null: false
     t.integer  "user_id"
     t.integer  "time_limit"
+    t.text     "body"
+    t.boolean  "published"
   end
 
   add_index "problems", ["user_id"], name: "index_problems_on_user_id"

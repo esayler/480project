@@ -6,7 +6,10 @@
       %span.label.label-default All
       -if policy(Problem).new?
         .pull-right
-          = button_to 'Create a New Problem', new_problem_path, method: :get, class: 'btn btn-primary btn-success'
+          = button_to 'Create a New Problem',
+            new_problem_path,
+            method: :get,
+            class: 'btn btn-primary btn-success'
   %div.table-responsive
     %table.table.table-hover
       %thead
@@ -23,9 +26,25 @@
             %td= problem.description
             %td= problem.language
             %td= problem.difficulty
-            %td=button_to 'Attempts', problem_attempts_path(problem.id), method: :get, class: 'btn btn-xs btn-default'
+            %td=button_to 'Attempts',
+              problem_attempts_path(problem.id),
+              method: :get,
+              class: 'btn btn-xs btn-default'
+
             - if policy(User).edit?
-              %td= button_to 'Edit', edit_problem_path(problem.id), method: :get, class: 'btn btn-xs btn-primary'
-            - if policy(User).destroy?
-              %td= button_to 'Delete', problem_path(problem.id), method: :delete, title: "Delete Problem ##{problem.id}: '#{problem.name}'", :data => {:confirm => 'Are you sure you want to delete this problem?', :commit => 'Delete', cancel: 'Cancel'}, class: 'btn btn-xs btn-danger'
+              %td= button_to 'Edit',
+                edit_problem_path(problem.id),
+                method: :get,
+                class: 'btn btn-xs btn-primary'
+
+            - if policy(problem).destroy?
+              %td= button_to 'Delete',
+                problem_path(problem.id),
+                method: :delete,
+                title: "Delete Problem ##{problem.id}: '#{problem.name}'",
+                data: { confirm: 'Are you sure you want to delete this problem?',
+                        commit: 'Delete',
+                        cancel: 'Cancel' },
+                class: 'btn btn-xs btn-danger'
+
   = will_paginate @problems, renderer: BootstrapPagination::Rails

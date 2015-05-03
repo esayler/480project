@@ -4,5 +4,6 @@ class Problem < ActiveRecord::Base
     has_many :attempts
 
     validates :name, :difficulty, :user_id, :description, presence: true
+    acts_as_markdown :body
 
 end

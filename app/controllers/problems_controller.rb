@@ -52,7 +52,7 @@ class ProblemsController < ApplicationController
 
   private
   def secure_params
-    params.require(:problem).permit(:name, :description, :language, :difficulty, :time_limit)
+    params.require(:problem).permit(:name, :description, :language, :difficulty, :time_limit, :body)
   end
 
 end

@@ -29,6 +29,7 @@ gem 'will_paginate-bootstrap'
 gem 'gretel'
 gem 'redcarpet', github: 'vmg/redcarpet'
 gem 'coderay'
+gem 'acts_as_markup'
 
 group :development do
   gem 'better_errors'
