@@ -1,6 +1,5 @@
-.container
-  - breadcrumb :edit_problem, @problem
-  .page-header
-    %h1 Edit Problem
-    %p.lead= @problem.name.titleize
-  = render partial: 'problem_form'
+- breadcrumb :edit_problem, @problem
+.page-header
+  %h1 Edit Problem
+  %p.lead= @problem.name.titleize
+= render partial: 'problem_form'

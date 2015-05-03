@@ -1,8 +1,26 @@
-=simple_form_for @problem do |f|
-    = f.input :name, required: true, prompt: "Enter your problem's name here"
-    = f.input :language, collection: [:python, :java, :ruby, :clang, :haskell], prompt: "Choose a language"
-    = f.input :difficulty, collection: 1..5, required: true, prompt: "Choose a difficulty"
-    = f.input :description, as: :text, hint: 'Enter a short one sentence description', input_html: { maxlength: 140 }, required: true
-    = f.input :time_limit, as: :integer, hint: 'Enter a time limit in minutes', required: true
-    = f.button :submit
+= simple_form_for @problem do |f|
+
+  = f.error_notification
+
+  = f.input :name,
+    placeholder: "Enter your problem's name here"
+
+  = f.input :language,
+    collection: [:python, :java, :ruby, :clang, :haskell],
+    prompt: "Choose a language"
+
+  = f.input :difficulty,
+    collection: 1..5,
+    prompt: "Choose a difficulty"
+
+  = f.input :description,
+    as: :text,
+    placeholder: 'Enter a short one sentence description',
+    input_html: { maxlength: 140 }
+
+  = f.input :time_limit,
+    as: :integer,
+    placeholder: 'Enter a time limit in minutes'
+
+  = f.button :submit
 

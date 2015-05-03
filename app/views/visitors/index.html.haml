@@ -1,16 +1,14 @@
 .jumbotron
-  .container-fluid
-    %h1 Welcome to CodeGate!
-.container-fluid
-  .row
-    .col-md-6
-      %h3 Are you a current Colgate CS Student?
-      %p You can complete challenges that are submitted by your professors and Colgate alumni to help you prepare for interviews or to get noticed by an alumni who might be hiring!
-    .col-md-6
-      %h3 Are you a Colgate faculty member or alum?
-      %p You can create challenges to see what skills current computer science students have and to help them prepare for interviews!
+  %h1 Welcome to CodeGate!
+.row
+  .col-md-6
+    %h3 Are you a current Colgate CS Student?
+    %p You can complete challenges that are submitted by your professors and Colgate alumni to help you prepare for interviews or to get noticed by an alumni who might be hiring!
+  .col-md-6
+    %h3 Are you a Colgate faculty member or alum?
+    %p You can create challenges to see what skills current computer science students have and to help them prepare for interviews!
 
-  - unless current_user
-    .row
-      .col-lg-12
-        =button_to 'Sign up/Log in with Google', user_omniauth_authorize_path(:google_oauth2), method: :get, class: 'btn btn-lg btn-success'
+- unless current_user
+  .row
+    .col-lg-12.text-center
+      =button_to 'Sign up/Log in with Google', user_omniauth_authorize_path(:google_oauth2), method: :get, class: 'btn btn-lg btn-success'

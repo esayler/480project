@@ -1,9 +1,8 @@
-.container
-  - breadcrumb :new_problem
-  .page-header
-    %h2 Create a New Problem
-  .row
-    .col.center
-      = render partial: 'problem_form'
-  .row-lg
-    =link_to "Back to Problems", problems_path
+- breadcrumb :new_problem
+.page-header
+  %h2 Create a New Problem
+.row
+  .col
+    = render partial: 'problem_form'
+.row-lg
+  =link_to "Back to Problems", problems_path

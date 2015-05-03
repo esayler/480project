@@ -1,30 +1,34 @@
-.container
-  - breadcrumb :problem, @problem
-  .page-header
-    %h2 View Problem
-    %p.lead= @problem.name
-  .row
-    .col-lg-4
-      .well
-        - if @problem
-          %h3 Name
-          %p= @problem.name
-          %h3 Difficulty
-          %p= @problem.difficulty
-          %h3 Description
-          %p= @problem.description
-          %h3 Author
-          %p= link_to @problem.user.name, user_path(@problem.user_id)
-          - unless @problem.language.blank?
-            %h3 Language
-            %p= @problem.language if @problem.language
-        - else
-          %h3 No Problem Found!
+- breadcrumb :problem, @problem
+.page-header
+  %h2
+    = @problem.name
+    - if @problem.language
+      %span.label.label-default
+        = @problem.language
+    %small.pull-right
+      = "Posted by #{@problem.user.name}"
 
-    .col-lg-8
-      - if policy(@problem).edit?
-        %p= button_to 'Edit', edit_problem_path(@problem.id), method: :get, class: 'btn btn-md btn-default'
-        %p= button_to 'Attempts', problem_attempts_path(@problem.id), method: :get, class: 'btn btn-md btn-default'
+.row
+  .col-xs-4.col-md-4
+    = button_to "Submit an Attempt", new_problem_attempt_path(@problem.id), method: :get, class: 'btn btn-lg btn-primary'
+  .col-xs-4.col-md-4
+    = button_to 'Show Attempts', problem_attempts_path(@problem.id), method: :get, class: 'btn btn-lg btn-default'
+  .col-xs-4.col-md-4
+    - if policy(@problem).edit?
+      = button_to 'Edit Problem', edit_problem_path(@problem.id), method: :get, class: 'btn btn-lg btn-warning'
 
-      - if current_user.student? or current_user.admin?
-        %p= button_to "New Attempt", new_problem_attempt_path(@problem.id), method: :get, class: 'btn btn-md btn-primary'
+.row
+  - if @problem
+    %h3
+      Difficulty
+      %small= @problem.difficulty
+    %h3
+      Description
+      %small= @problem.description
+    %h3
+      Author
+      %small= link_to @problem.user.name, user_path(@problem.user_id)
+  - else
+    %h3 No Problem Found!
+
+  

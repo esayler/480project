@@ -14,5 +14,6 @@
       = render 'layouts/navigation'
     %main{:role => "main"}
       = breadcrumbs style: :bootstrap
-      = render 'layouts/messages'
-      = yield
+      .container-fluid
+        = render 'layouts/messages'
+        = yield

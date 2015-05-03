@@ -1,11 +1,23 @@
-.container
-  - breadcrumb :user, @user
-  .page-header
-    %h3 User
-  %p
-    Name: #{@user.name if @user.name}
-    %br
-    Email: #{@user.email if @user.email}
-    %br
-    Role: #{@user.role.titleize if @user.role}
-    %br
+- breadcrumb :user, @user
+.page-header
+  %h2
+    =@user.name
+    - if @user.admin?
+      %span.label.label-danger= @user.role.titleize
+    - elsif @user.student?
+      %span.label.label-success= @user.role.titleize
+    - elsif @user.alum?
+      %span.label.label-default= @user.role.titleize
+    - elsif @user.prof?
+      %span.label.label-info= @user.role.titleize
+
+.panel.panel-default
+  .panel-heading
+    .panel-title Info:
+  .panel-body
+    .table.table-striped
+      %tbody
+        %tr
+          %td Email:
+          %td= @user.email ? @user.email : 'Not Available'
+                  

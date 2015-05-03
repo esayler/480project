@@ -1,10 +1,9 @@
-#main
-  =form_for @user,:method => :patch do |f|
-    =f.label :name
-    =f.text_field :name, :required => true
-    %br
-    =f.label :email
-    =f.text_field :email, :required => true
-    %br
-    =f.submit "Update User"
-  =link_to "Return to homepage", problems_path
+=form_for @user,:method => :patch do |f|
+  =f.label :name
+  =f.text_field :name, :required => true
+  %br
+  =f.label :email
+  =f.text_field :email, :required => true
+  %br
+  =f.submit "Update User"
+=link_to "Return to homepage", problems_path
