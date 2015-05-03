@@ -40,7 +40,7 @@ module ApplicationHelper
       :superscript => true
     }
     markdown_to_html = Redcarpet::Markdown.new(coderayified, options)
-    puts 'DEBUG - text class:' + text.class
+    puts 'DEBUG - text class:' + text.class.to_s
     markdown_to_html.render(text).html_safe
   end
 end
