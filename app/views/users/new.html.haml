@@ -1,9 +1,0 @@
-=form_for User.new do |f|
-  =f.label :name
-  =f.text_field :name, :value => @name, :required => true
-  %br
-  =f.label :email
-  =f.text_field :email, :value => @email, :required => true
-  %br
-  =f.submit "Create User"
-=link_to "Return to homepage", problems_path
