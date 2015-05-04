@@ -34,12 +34,11 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     authorize user
     user.destroy
-    redirect_to users_path, :notice => "Account for #{@user.name} successfully deleted."
+    redirect_to users_path, :notice => "Account successfully deleted."
   end
 
   private
     def secure_params
       params.require(:user).permit(:role)
     end
-
 end

@@ -10,7 +10,11 @@
   .col-md-6
     %h3.pull-left
       Author
-      %small= link_to @problem.user.name, user_path(@problem.user_id)
+      - if @author
+        %small= link_to @author, user_path(@problem.user_id)
+      - else
+        %small Deleted
+
   .col-md-6
     %h3.pull-right
       Difficulty
@@ -20,7 +24,7 @@
   .panel.panel-default
     .panel-body
       - if @problem.body.blank?
-        %p No Description Body!
+        %p No Details!
       - else
         = markdown(@problem.body)
 

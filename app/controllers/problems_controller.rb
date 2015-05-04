@@ -8,6 +8,7 @@ class ProblemsController < ApplicationController
 
   def show
     @problem = Problem.find(params[:id])
+    @author = @problem.user.name if @problem.user
   end
 
   def new
